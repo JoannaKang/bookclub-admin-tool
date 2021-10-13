@@ -1,17 +1,34 @@
 import express from 'express'
-// @ts-ignore
-import { db } from './db/database'
+import 'express-async-errors';
+import cors from 'cors';
+import { sequelize } from './db/database'
+import { Member } from './model/members'
+const PORT = '8080'
 
 const app = express()
+app.use(express.json());
+app.use(cors());
 
-const PORT = '8080'
 
 app.get('/', (req, res) => {
   console.log('get')
 })
 
-db.getConnection().then((connection:any) => { console.log(connection)})
+const Members = Member
 
-app.listen(PORT,  () => { 
-  console.log(`🚀 Server is running from http://localhost:${PORT}`)
+// @ts-ignore
+app.use((req, res, next) => {
+  res.sendStatus(404);
+});
+// @ts-ignore
+app.use((error, req, res, next) => {
+  console.error(error);
+  res.sendStatus(500);
+});
+
+sequelize.sync().then(() => {
+  app.listen(PORT,  () => { 
+    console.log(`🚀 Server is running from http://localhost:${PORT}`)
+  })
 })
+
