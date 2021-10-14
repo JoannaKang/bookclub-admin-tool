@@ -14,9 +14,5 @@ export const Member = sequelize.define(
   username: {
     type: DataTypes.STRING(45),
     allowNull: false
-  },
-  attendance: {
-    type: DataTypes.DATE,
-    allowNull: false
   }
 })

@@ -2,7 +2,11 @@ import express from 'express'
 import 'express-async-errors';
 import cors from 'cors';
 import { sequelize } from './db/database'
-import { Member } from './model/members'
+
+import membersRouter from './router/members'
+import reviewsRouter from './router/reviews'
+import meetingsRouter from './router/meetings'
+
 const PORT = '8080'
 
 const app = express()
@@ -10,11 +14,10 @@ app.use(express.json());
 app.use(cors());
 
 
-app.get('/', (req, res) => {
-  console.log('get')
-})
+app.use('/members', membersRouter)
+app.use('/reviews', reviewsRouter)
+app.use('/meetings', meetingsRouter)
 
-const Members = Member
 
 // @ts-ignore
 app.use((req, res, next) => {
