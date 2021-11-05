@@ -1,6 +1,6 @@
 import mysql from 'mysql2'
 import SQ from 'sequelize'
-import {config} from '../../../config'
+import {config} from '../config'
 
 const { host, user, database, password } = config.db
 

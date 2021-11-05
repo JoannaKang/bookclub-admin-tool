@@ -29,7 +29,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-sequelize.sync().then(() => {
+sequelize.sync().then((client) => {
   app.listen(PORT,  () => { 
     console.log(`🚀 Server is running from http://localhost:${PORT}`)
   })
