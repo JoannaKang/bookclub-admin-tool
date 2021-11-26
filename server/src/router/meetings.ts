@@ -3,6 +3,7 @@ import * as meetingsController from '../controller/meetings'
 
 const router = express.Router()
 
-router.get('/meetings', meetingsController.getMeetingsInfo)
+router.get('/', meetingsController.getMeetingsInfo)
+router.post('/createMeeting', meetingsController.createMeeting)
 
 export default router

@@ -1,17 +1,28 @@
-import { where } from 'sequelize/types'
+import { Request, Response } from 'express';
+
 import { Member } from '../model/members'
 
 const Members = Member
 
-export async function getMembersInfo (req:any, res:any) {
-  console.log(req.body)
-  console.log('members')
+export async function getMembersInfo (req:Request, res:Response) {
+  try {
+    const members = await Members.findAll()
+    res.status(200).json(members)
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }
 
-export async function createMemberInfo (req:any, res:any) {
-  const { username } = req.body
-  console.log('before create')
-  const result = await Members.create({ username: username })
-  console.log('after create')
-  res.status(200).json(result)
+export async function createMemberInfo (req:Request, res:Response) {
+  try {
+    const { user_id, name, is_admin } = req.body
+    const newUser = await Members.create({
+      user_id: user_id,
+      name: name,
+      is_admin: is_admin
+    })
+    res.status(200).json(newUser)
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }

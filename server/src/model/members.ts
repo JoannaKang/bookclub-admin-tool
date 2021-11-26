@@ -1,6 +1,5 @@
 import SQ from 'sequelize'
 import { sequelize } from '../db/database'
-import { Meeting } from './meetings'
 const DataTypes = SQ.DataTypes
 const Sequelize = SQ.Sequelize;
 
