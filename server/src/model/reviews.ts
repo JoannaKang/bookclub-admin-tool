@@ -1,6 +1,7 @@
 import SQ from 'sequelize'
 import { sequelize } from '../db/database'
 import { Member } from './members'
+import { Meeting } from './meetings'
 const DataTypes = SQ.DataTypes
 const Sequelize = SQ.Sequelize;
 
@@ -14,7 +15,11 @@ export const Review = sequelize.define(
       allowNull: false,
       primaryKey: true
     },
-    username: {
+    name: {
+      type: DataTypes.STRING(45),
+      allowNull: false
+    },
+    user_id: {
       type: DataTypes.STRING(45),
       allowNull: false
     },
@@ -41,3 +46,4 @@ export const Review = sequelize.define(
   })
 
   Review.belongsTo(Member)
+  Review.belongsTo(Meeting)

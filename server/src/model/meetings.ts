@@ -13,6 +13,10 @@ export const Meeting = sequelize.define(
       allowNull: false,
       primaryKey: true
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     location: {
       type: DataTypes.STRING(200),
       allowNull: false
@@ -20,7 +24,16 @@ export const Meeting = sequelize.define(
     introduction: {
       type: DataTypes.STRING(200),
       allowNull: false
+    },
+    admin_id: {
+      type: DataTypes.STRING(45),
+      allowNull:false
     }
   })
 
-  Meeting.belongsTo(Member)
+Meeting.belongsToMany(Member, {
+  through: 'MeetingMemberMappingTable'
+})
+Member.belongsToMany(Meeting, {
+  through: 'MeetingMemberMappingTable', 
+})

@@ -1,6 +1,8 @@
 import SQ from 'sequelize'
 import { sequelize } from '../db/database'
+import { Meeting } from './meetings'
 const DataTypes = SQ.DataTypes
+const Sequelize = SQ.Sequelize;
 
 export const Member = sequelize.define(
   'member', 
@@ -11,12 +13,17 @@ export const Member = sequelize.define(
     allowNull: false,
     primaryKey: true
   },
-  username: {
+  user_id: {
+    type: DataTypes.STRING(45),
+    allowNull: false,
+  },
+  name: {
     type: DataTypes.STRING(45),
     allowNull: false
   },
-  attendance: {
-    type: DataTypes.DATE,
+  is_admin: {
+    type: DataTypes.BOOLEAN,
     allowNull: false
   }
 })
+
