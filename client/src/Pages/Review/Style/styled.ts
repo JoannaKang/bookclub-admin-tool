@@ -1,8 +1,9 @@
 import styled, {css, FlattenInterpolation} from 'styled-components'
 
 export const Wrapper = styled.section`
-  background-color: yellow;
-  width: 100vw;
+  display: flex;
   height: 100vh;
-  vertical-align: middle;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 `
