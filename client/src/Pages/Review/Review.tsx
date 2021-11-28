@@ -9,55 +9,66 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
+import { createReview } from '../../ApiService/Review'
 
 export const Review = () => {
-  const [value, setValue] = React.useState(2);
-  const [title, setTitle] = React.useState('')
-  const [author, setAuthor] = React.useState('')
-  const [genre, setGenre] = React.useState('')
+  
+  const CATEGORY = ['Arts', 'Biographies', 'Business', 'Technology', 'Fantasy', 'Fiction & Literature', 'Essay', 'Mind & Health', 'Politics', 'Science Fiction', 'Travel', 'Self-Help']
+  
+  const initialState = {
+    title: '',
+    author: '',
+    genre: '',
+    review: '',
+    rate: 0
+  }
+
+  const [review, setReview] = React.useState(initialState)
+
+  function handleChanges(e) {
+    setReview((review) => ({
+      ...review,
+      [e.target.name]: e.target.value
+    }))
+  }
 
   return (
     <Wrapper className="Review">
       <h1>Today’s Review</h1>
-      <TextField id="standard-basic" label="Title" variant="standard" onChange={e => setTitle(e.target.value)}/>
-      <TextField id="standard-basic" label="Author" variant="standard" onChange={e => setTitle(e.target.value)}/>
+      <TextField label="Title" name="title" variant="standard" onChange={e => handleChanges(e)}/>
+      <TextField label="Author" name="author" variant="standard" onChange={e => handleChanges(e)}/>
       <Box sx={{ minWidth: 200 }}>
-      <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Genre</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={10}
-          label="Genre"
-          onChange={()=>console.log('here')}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
+        <FormControl fullWidth>
+        <InputLabel id="genre-select-label">Genre</InputLabel>
+          <Select
+            labelId="genre-select-label"
+            id="genre-select"
+            label="Genre"
+            name="genre"
+            defaultValue=""
+            onChange={e => handleChanges(e)}
+          >
+          {CATEGORY.map((item, index) => 
+            <MenuItem key={index} value={item}>{item}</MenuItem>
+          )}
+          </Select>
+        </FormControl>
       </Box>
       <TextField
-          id="outlined-multiline-static"
           label="Review"
+          name="review"
           multiline
           rows={6}
-          defaultValue="Write your review"
+          placeholder="Write your review"
           style={{width: 200}}
+          onChange={e => handleChanges(e)}
         />
-        <Box sx={{
-        '& > legend': { mt: 2 },
-      }}>
-        <Typography component="legend">Rate</Typography>
-        <Rating
-          name="simple-controlled"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(4);
-          }}
-        />
-      </Box>
-      <Button variant="contained" onClick={()=>console.log(title)}> Submit</Button>
+      <Typography component="legend">Rate</Typography>
+      <Rating
+        name="rate"
+        onChange={e => handleChanges(e)}
+      />
+      <Button variant="contained" onClick={()=>createReview(review)}> Submit</Button>
     </Wrapper>
   )
 }
