@@ -12,9 +12,13 @@ import { Admin } from './Pages/Admin/Admin'
 
 import { getMemberInfoByUserId } from './ApiService/Members'
 
+import { Member } from './Interfaces/Member'
+
+import * as Style from './style'
+
 const App:React.FC = () => {
 
-  const [loginInfo, setLoginInfo] = React.useState([])
+  const [loginInfo, setLoginInfo] = React.useState<Member[]>([])
 
   useEffect(() => {
     getMemberInfoByUserId('jfrences')
@@ -22,16 +26,18 @@ const App:React.FC = () => {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Fragment>
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path="/review" element={<Review loginInfo={loginInfo}/>}/>
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </Fragment>
-    </BrowserRouter>
+    <Style.Background>
+      <BrowserRouter>
+        <Fragment>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/review" element={<Review loginInfo={loginInfo}/>}/>
+          </Routes>
+        </Fragment>
+      </BrowserRouter>
+    </Style.Background>
   );
 }
 

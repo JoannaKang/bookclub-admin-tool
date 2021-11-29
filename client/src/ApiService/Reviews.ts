@@ -2,7 +2,7 @@ import { Review } from '../Interfaces/Review'
 
 const BASE_URL = 'http://localhost:8080'
 
-export const createReview = (review:Review) => {
+export const createReview = (review: Review) => {
   try {
     fetch(BASE_URL + '/reviews/createReview', {
       method: 'POST',

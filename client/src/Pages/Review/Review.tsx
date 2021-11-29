@@ -37,7 +37,7 @@ export const Review = ({loginInfo}) => {
       <h1>Today’s Review</h1>
       <TextField label="Title" name="title" variant="standard" onChange={e => handleChanges(e)}/>
       <TextField label="Author" name="author" variant="standard" onChange={e => handleChanges(e)}/>
-      <Box sx={{ minWidth: 200 }}>
+      <Box sx={{ minWidth: 200 }} padding={[2, 0, 1, 0]}>
         <FormControl fullWidth>
         <InputLabel id="genre-select-label">Genre</InputLabel>
           <Select
@@ -54,20 +54,24 @@ export const Review = ({loginInfo}) => {
           </Select>
         </FormControl>
       </Box>
-      <TextField
-          label="Review"
-          name="review"
-          multiline
-          rows={6}
-          placeholder="Write your review"
-          style={{width: 200}}
+      <Box sx={{ minWidth: 200 }} padding={1}>
+        <TextField
+            label="Review"
+            name="review"
+            multiline
+            rows={6}
+            placeholder="Write your review"
+            style={{width: 200}}
+            onChange={e => handleChanges(e)}
+          />
+      </Box>
+      <Box sx={{ minWidth: 200 }} padding={1}>
+        <Typography component="legend">Rate</Typography>
+        <Rating
+          name="rate"
           onChange={e => handleChanges(e)}
         />
-      <Typography component="legend">Rate</Typography>
-      <Rating
-        name="rate"
-        onChange={e => handleChanges(e)}
-      />
+      </Box>
       <Button variant="contained" onClick={()=>createReview(review)}> Submit</Button>
     </Wrapper>
   )
