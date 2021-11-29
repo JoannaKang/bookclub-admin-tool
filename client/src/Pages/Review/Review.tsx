@@ -9,10 +9,10 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
-import { createReview } from '../../ApiService/Review'
+import { createReview } from '../../ApiService/Reviews'
 
-export const Review = () => {
-  
+export const Review = ({loginInfo}) => {
+
   const CATEGORY = ['Arts', 'Biographies', 'Business', 'Technology', 'Fantasy', 'Fiction & Literature', 'Essay', 'Mind & Health', 'Politics', 'Science Fiction', 'Travel', 'Self-Help']
   
   const initialState = {
