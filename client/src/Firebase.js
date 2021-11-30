@@ -1,8 +1,7 @@
-import React from 'react';
-import { initializeApp } from "firebase/app"
-import { getAnalytics } from "firebase/analytics"
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider} from "firebase/auth";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyCmBrVHLIaw24Dr5PL9-RXGVYbF2wd8osc",
   authDomain: "bookclub-admin-tool.firebaseapp.com",
   projectId: "bookclub-admin-tool",
@@ -12,17 +11,43 @@ const firebaseConfig = {
   measurementId: "G-KP3MLV0TQM"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig)
+initializeApp(firebaseConfig)
 
+const provider = new GoogleAuthProvider()
 
-export const auth = firebase.auth()
-export const firestore = firebase.firestore()
+export const signUpWithEmail = async (email, password) => {
+  try {
+    const auth = getAuth()
+    const newUser = await createUserWithEmailAndPassword(auth, email, password)
+    return newUser.user
+  } catch (error) {
+    alert(error.message)
+  }
+}
 
-const provider = new firebase.auth.GoogleAuthProvider()
+export const signInWithEmail =(email, password) => {
+  try {
+    const auth = getAuth()
+    signInWithEmailAndPassword(auth, email, password)
+      .then(res => console.log(res.user))
+  } catch (error) {
+    alert(error.message)
+  }
+}
 
-provider.setCustomPrameters({prompt: 'select_account'})
-
-export const signInWithGoogle = () => auth.signInWithPopup(provider)
-
-export default firebase
+export const signUpWithGoogleId = async () => {
+  try {
+    const auth = getAuth();
+    const loginUser = await signInWithPopup(auth, provider)
+    return loginUser.user
+  } catch (error) {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    alert(errorCode, errorMessage, email, credential)    
+  }
+}

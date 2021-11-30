@@ -12,7 +12,11 @@ export const Member = sequelize.define(
     allowNull: false,
     primaryKey: true
   },
-  user_id: {
+  userId: {
+    type: DataTypes.STRING(45),
+    allowNull: false,
+  },
+  email: {
     type: DataTypes.STRING(45),
     allowNull: false,
   },
@@ -20,7 +24,7 @@ export const Member = sequelize.define(
     type: DataTypes.STRING(45),
     allowNull: false
   },
-  is_admin: {
+  isAdmin: {
     type: DataTypes.BOOLEAN,
     allowNull: false
   }

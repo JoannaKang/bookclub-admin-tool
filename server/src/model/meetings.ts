@@ -21,7 +21,11 @@ export const Meeting = sequelize.define(
       type: DataTypes.STRING(200),
       allowNull: false
     },
-    admin_id: {
+    location_review: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    adminId: {
       type: DataTypes.INTEGER,
       allowNull:false
     }

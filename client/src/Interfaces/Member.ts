@@ -1,7 +1,8 @@
 export interface Member {
-  id: number
   isAdmin: boolean
-  name: string
-  updateAt: string
-  userId: string
+  name: string | null | undefined
+  userId: string | undefined
+  email: string | null | undefined
+  id?: number
+  updateAt?: string
 }

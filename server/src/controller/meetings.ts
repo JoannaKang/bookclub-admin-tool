@@ -8,13 +8,12 @@ export async function getMeetingsInfo (req:Request, res:Response) {
 }
 
 export async function createMeeting (req:Request, res:Response) {
-  console.log(req.body)
   try {
-    const { location, introduction, admin_id } = req.body
+    const { location, introduction, adminId } = req.body
     const newMeeting = await Meeting.create({
       location: location, 
       introduction: introduction,
-      admin_id: admin_id
+      adminId: adminId
     })
     res.status(200).json(newMeeting)
   } catch (error) {

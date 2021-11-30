@@ -13,13 +13,28 @@ export async function getMembersInfo (req:Request, res:Response) {
   }
 }
 
-export async function createMemberInfo (req:Request, res:Response) {
+export async function getMemberInfoByUserId (req:Request, res:Response) {
   try {
-    const { user_id, name, is_admin } = req.body
+    const member = await Members.findAll({
+      where: {
+        userId: req.params.userId
+      }
+    })
+    res.status(200).json(member)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+export async function createMember (req:Request, res:Response) {
+  try {
+    console.log(req.body)
+    const { userId, email, name, isAdmin } = req.body
     const newUser = await Members.create({
-      user_id: user_id,
+      userId: userId,
+      email: email,
       name: name,
-      is_admin: is_admin
+      isAdmin: isAdmin
     })
     res.status(200).json(newUser)
   } catch (error) {
