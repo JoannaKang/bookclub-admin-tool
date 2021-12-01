@@ -5,24 +5,32 @@ import {
   Route
 } from "react-router-dom";
 
+import { getAuth } from "firebase/auth";
+
 import { Main } from './Pages/Main/Main'
 import { Review } from './Pages/Review/Review'
 import { SignUp } from './Pages/SignUp/SignUp'
 import { Admin } from './Pages/Admin/Admin'
 
-import { getMemberInfoByUserId } from './ApiService/Members'
-
 import { Member } from './Interfaces/Member'
 
 import * as Style from './style'
+import { getMemberInfoByUserId } from 'ApiService/Members';
 
 const App:React.FC = () => {
 
   const [loginInfo, setLoginInfo] = React.useState<Member[]>([])
 
   useEffect(() => {
-    getMemberInfoByUserId('jfrences')
-      .then(res => setLoginInfo(res))
+    getAuth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log("authenticated", user);
+        getMemberInfoByUserId(user.uid)
+          .then(res => setLoginInfo(res))
+      } else {
+        console.log("signed out");
+      }
+    })
   }, [])
 
   return (

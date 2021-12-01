@@ -21,17 +21,23 @@ export const signUpWithEmail = async (email, password) => {
     const newUser = await createUserWithEmailAndPassword(auth, email, password)
     return newUser.user
   } catch (error) {
-    alert(error.message)
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.email;
+    alert(errorCode, errorMessage, email)    
   }
 }
 
-export const signInWithEmail =(email, password) => {
+export const signInWithEmail = (email, password) => {
   try {
     const auth = getAuth()
     signInWithEmailAndPassword(auth, email, password)
       .then(res => console.log(res.user))
   } catch (error) {
-    alert(error.message)
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.email;
+    alert(errorCode, errorMessage, email)    
   }
 }
 
@@ -41,13 +47,9 @@ export const signUpWithGoogleId = async () => {
     const loginUser = await signInWithPopup(auth, provider)
     return loginUser.user
   } catch (error) {
-    // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
-    // The email of the user's account used.
     const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    alert(errorCode, errorMessage, email, credential)    
+    alert(errorCode, errorMessage, email)    
   }
 }

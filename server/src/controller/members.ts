@@ -27,17 +27,22 @@ export async function getMemberInfoByUserId (req:Request, res:Response) {
 }
 
 export async function createMember (req:Request, res:Response) {
-  try {
-    console.log(req.body)
-    const { userId, email, name, isAdmin } = req.body
-    const newUser = await Members.create({
+  console.log(req.body)
+  const { userId, email, name, isAdmin } = req.body
+  const member = await Members.findAll({
+    where: {
+      userId: userId
+    }
+  })
+  if (member.length > 0) {
+    res.status(200).json(member[0])
+  } else {
+    const newMember = await Members.create({
       userId: userId,
       email: email,
       name: name,
       isAdmin: isAdmin
     })
-    res.status(200).json(newUser)
-  } catch (error) {
-    res.status(500).json(error)
-  }
+    res.status(200).json(newMember)
+  } 
 }

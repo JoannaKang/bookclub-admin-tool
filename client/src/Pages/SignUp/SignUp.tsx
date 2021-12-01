@@ -1,4 +1,5 @@
 import * as React from 'react';
+// import { useHistory } from "react-router-dom"
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,6 +17,7 @@ import { signUpWithEmail, signUpWithGoogleId, signInWithEmail } from '../../Fire
 export const SignUp = () => {
 
   const theme = createTheme();
+  // const history = useHistory();
   const initialState = { name: '', email: '', password: '' }
   const [loginInfo, setLoginInfo] = React.useState(initialState)
   const [isSignUp, setIsSignUp] = React.useState(true)
@@ -32,25 +34,30 @@ export const SignUp = () => {
           isAdmin: false
         }
         createMemberInfo(memberInfo)
+        alert(` Hello ${memberInfo.name} !`)
+        // history.push('/review')
       })
   }
 
-  const submitGoogle = (e)  => {
+  const submitGoogle = async (e)  => {
     e.preventDefault()
-    signUpWithGoogleId()
+    const loginUser = await signUpWithGoogleId()
       .then(res => {
-        const memberInfo = {
+        return {
           userId: res?.uid,
           email: res?.email,
           name: res?.displayName,
           isAdmin: false
         }
-        createMemberInfo(memberInfo)
       })
+
+    createMemberInfo(loginUser)
+    alert(` Hello ${loginUser.name} !`)
+    // history.push('/review')
   }
   
   function handleChange(e) {
-    setLoginInfo((info) =>({
+    setLoginInfo(() =>({
       ...loginInfo, 
       [e.target.name]: e.target.value
     }))

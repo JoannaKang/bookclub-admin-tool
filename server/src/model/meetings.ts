@@ -21,7 +21,7 @@ export const Meeting = sequelize.define(
       type: DataTypes.STRING(200),
       allowNull: false
     },
-    location_review: {
+    locationReview: {
       type: DataTypes.TEXT,
       allowNull: false
     },

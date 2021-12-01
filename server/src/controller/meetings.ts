@@ -9,9 +9,10 @@ export async function getMeetingsInfo (req:Request, res:Response) {
 
 export async function createMeeting (req:Request, res:Response) {
   try {
-    const { location, introduction, adminId } = req.body
+    const { location, locationReview, introduction, adminId } = req.body
     const newMeeting = await Meeting.create({
       location: location, 
+      locationReview: locationReview,
       introduction: introduction,
       adminId: adminId
     })

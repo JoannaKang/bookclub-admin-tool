@@ -15,9 +15,7 @@ import Typography from '@mui/material/Typography';
 import { createReview } from '../../ApiService/Reviews'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
 export const Review = ({loginInfo}) => {
-
   const theme = createTheme();
   const CATEGORY = ['Arts', 'Biographies', 'Business', 'Technology', 'Fantasy', 'Fiction & Literature', 'Essay', 'Mind & Health', 'Politics', 'Science Fiction', 'Travel', 'Self-Help']
   
@@ -26,7 +24,7 @@ export const Review = ({loginInfo}) => {
     author: '',
     genre: '',
     review: '',
-    rate: 0
+    rate: 0,
   }
 
   const [review, setReview] = React.useState(initialState)
@@ -39,6 +37,7 @@ export const Review = ({loginInfo}) => {
   }
 
   return (
+    // 후기 작성 히스토리 / 새 후기 작성 창 토글하도록 구성하기
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -88,7 +87,7 @@ export const Review = ({loginInfo}) => {
               onChange={e => handleChanges(e)}
             />
           </Box>
-          <Button variant="contained" onClick={()=>createReview(review)}> Submit</Button>
+          <Button variant="contained" onClick={()=>createReview({memberId: loginInfo.id, meetingId: 1, ...review})}> Submit</Button>
         </Box>
       </Container>
     </ThemeProvider>
