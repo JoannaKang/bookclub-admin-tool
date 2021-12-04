@@ -2,8 +2,7 @@ import { Member } from '../Interfaces/Member'
 
 const BASE_URL = 'http://localhost:8080'
 
-
-export const getMemberInfoByUserId = async (userId: string | undefined):Promise<any> => {
+export const getMemberInfoByUserId = async (userId: string | undefined):Promise<Member> => {
   const response = await fetch(BASE_URL + `/members/${userId}`)
   const user = await response.json()
   return user.length > 0 ? user[0] : undefined
@@ -17,5 +16,4 @@ export const createMemberInfo =  (memberInfo:Member) => {
     },
     body: JSON.stringify(memberInfo)
   })
-  .then(async (res) => console.log(await res.json()))
 }

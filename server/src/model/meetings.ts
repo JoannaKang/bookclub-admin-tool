@@ -2,7 +2,6 @@ import SQ from 'sequelize'
 import { sequelize } from '../db/database'
 import { Member } from './members'
 const DataTypes = SQ.DataTypes
-const Sequelize = SQ.Sequelize;
 
 export const Meeting = sequelize.define(
   'meeting', 

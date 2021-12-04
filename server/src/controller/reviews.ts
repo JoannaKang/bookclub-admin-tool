@@ -1,9 +1,5 @@
-import { Request, Response } from 'express';
-
+import { Request, Response } from 'express'
 import { Review } from '../model/reviews'
-
-
-const Reviews = Review
 
 export async function getReviewByUser (req:Request, res:Response) {
   const reviews = await Review.findAll({

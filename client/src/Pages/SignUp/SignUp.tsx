@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { useHistory } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,8 +16,9 @@ import { signUpWithEmail, signUpWithGoogleId, signInWithEmail } from '../../Fire
 
 export const SignUp = () => {
 
-  const theme = createTheme();
-  // const history = useHistory();
+  const theme = createTheme()
+  const navigate = useNavigate()
+  const navigateToReview = () => navigate('/createReview')
   const initialState = { name: '', email: '', password: '' }
   const [loginInfo, setLoginInfo] = React.useState(initialState)
   const [isSignUp, setIsSignUp] = React.useState(true)
@@ -35,7 +36,7 @@ export const SignUp = () => {
         }
         createMemberInfo(memberInfo)
         alert(` Hello ${memberInfo.name} !`)
-        // history.push('/review')
+        navigateToReview()
       })
   }
 
@@ -53,7 +54,7 @@ export const SignUp = () => {
 
     createMemberInfo(loginUser)
     alert(` Hello ${loginUser.name} !`)
-    // history.push('/review')
+    navigateToReview()
   }
   
   function handleChange(e) {

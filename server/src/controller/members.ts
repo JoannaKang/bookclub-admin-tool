@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-
 import { Member } from '../model/members'
 
 const Members = Member
@@ -27,7 +26,6 @@ export async function getMemberInfoByUserId (req:Request, res:Response) {
 }
 
 export async function createMember (req:Request, res:Response) {
-  console.log(req.body)
   const { userId, email, name, isAdmin } = req.body
   const member = await Members.findAll({
     where: {

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Wrapper } from './Style/styled';
+
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -12,22 +11,34 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
+
+import { getMeetingDates } from '../../ApiService/Meetings'
 import { createReview } from '../../ApiService/Reviews'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useEffect } from 'react';
 
 export const Review = ({loginInfo}) => {
+  console.log(loginInfo)
   const theme = createTheme();
   const CATEGORY = ['Arts', 'Biographies', 'Business', 'Technology', 'Fantasy', 'Fiction & Literature', 'Essay', 'Mind & Health', 'Politics', 'Science Fiction', 'Travel', 'Self-Help']
   
-  const initialState = {
+  const initialReviewState = {
     title: '',
     author: '',
     genre: '',
     review: '',
     rate: 0,
+    meetingId: 0
   }
+  const initialMeetingOptionState = {meetingId: '', date: ''}
 
-  const [review, setReview] = React.useState(initialState)
+  const [review, setReview] = React.useState(initialReviewState)
+  const [meetingOption, setMeetingOption] = React.useState([initialMeetingOptionState])
+
+  useEffect(() => {
+    getMeetingDates()
+      .then(dates => setMeetingOption(dates))
+  }, [])
 
   function handleChanges(e) {
     setReview((review) => ({
@@ -37,7 +48,6 @@ export const Review = ({loginInfo}) => {
   }
 
   return (
-    // 후기 작성 히스토리 / 새 후기 작성 창 토글하도록 구성하기
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -49,7 +59,24 @@ export const Review = ({loginInfo}) => {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5">Today’s Review</Typography>
+        <Typography component="h1" variant="h5">Today’s Review</Typography>
+        <Box sx={{ minWidth: 200 }} padding={[0, 2, 0, 0]}>
+          <FormControl fullWidth>
+            <InputLabel id="meeting-select-label">Meeting date</InputLabel>
+              <Select
+                labelId="meeting-select-label"
+                id="meeting-select"
+                label="meetingId"
+                name="meetingId"
+                defaultValue=""
+                onChange={e => handleChanges(e)}
+              >
+              {meetingOption?.map((item, index) => 
+                <MenuItem key={index} value={item.meetingId}>{item.date}</MenuItem>
+              )}
+              </Select>
+            </FormControl>
+          </Box>
           <TextField label="Title" name="title" variant="standard" margin="normal" onChange={e => handleChanges(e)}/>
           <TextField label="Author" name="author" variant="standard" margin="normal" onChange={e => handleChanges(e)}/>
           <Box sx={{ minWidth: 200 }} padding={[2, 0, 1, 0]}>
@@ -87,7 +114,7 @@ export const Review = ({loginInfo}) => {
               onChange={e => handleChanges(e)}
             />
           </Box>
-          <Button variant="contained" onClick={()=>createReview({memberId: loginInfo.id, meetingId: 1, ...review})}> Submit</Button>
+          <Button variant="contained" onClick={()=>createReview({memberId: loginInfo.id, ...review})}> Submit</Button>
         </Box>
       </Container>
     </ThemeProvider>
