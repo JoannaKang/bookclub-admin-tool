@@ -44,6 +44,7 @@ export const SignUp = () => {
     e.preventDefault()
     const loginUser = await signUpWithGoogleId()
       .then(res => {
+        console.log(res)
         return {
           userId: res?.uid,
           email: res?.email,
