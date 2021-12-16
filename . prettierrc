@@ -9,4 +9,8 @@
   "orderedImports": true,
   "bracketSpacing": true,
   "jsxBracketSameLine": false
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "arrowParens": "avoid",
+  "endOfLine": "auto"
 }

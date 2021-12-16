@@ -31,8 +31,8 @@ export const Meeting = sequelize.define(
   })
 
 Meeting.belongsToMany(Member, {
-  through: 'MeetingMemberMappingTable'
+  through: 'meeting_member_mapping'
 })
 Member.belongsToMany(Meeting, {
-  through: 'MeetingMemberMappingTable', 
+  through: 'meeting_member_mapping', 
 })

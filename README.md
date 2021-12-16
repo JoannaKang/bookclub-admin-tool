@@ -4,9 +4,16 @@
 npm start
 ```
 * In `src/server`: Launch server in 8080
-```
-npm run dev
-```
+   * Install mysql server in local machine
+   * Create mysql database: Use `npm run db:pre-migrate` command with mysql password
+    ```
+    // If mysql password is "password"
+    npm run db:pre-migrate:password
+    ```
+   * Create tables
+    ```
+      npm run dev
+    ```
 
 # Project Overview
 🏆  [MVP](https://docs.google.com/spreadsheets/d/1_-p8eZ5WpY_ZTfHuFDTDNh8PJVc6dZndySkQXgKQCU0/edit#gid=0)<br>

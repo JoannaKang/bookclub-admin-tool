@@ -21,5 +21,6 @@ export async function createReview (req:Request, res:Response) {
     review: review,
     genre: genre
   })
+  // TODO: mapping table에 meetingID /memeberID 저장하기
   res.status(200).json(newReview)
 }

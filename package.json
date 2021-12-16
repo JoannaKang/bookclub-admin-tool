@@ -1,0 +1,34 @@
+{
+  "name": "bookclub-admin-tool",
+  "version": "1.0.0",
+  "description": "* In `src/client`: Launch server in 3000 ``` npm start ``` * In `src/server`: Launch server in 8080    * Install mysql server in local machine    * Create mysql database: Use `npm run db:pre-migrate` command with mysql password     ```     // If mysql password is \"password\"     npm run db:pre-migrate:password     ```    * Create tables     ```       npm run dev     ```",
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "eslint": "^8.4.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.1",
+    "react-router-dom": "^6.0.2"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo hi"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoannaKang/bookclub-admin-tool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoannaKang/bookclub-admin-tool/issues"
+  },
+  "homepage": "https://github.com/JoannaKang/bookclub-admin-tool#readme"
+}
