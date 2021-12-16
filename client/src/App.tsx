@@ -1,12 +1,7 @@
-import React, {Fragment, useEffect} from 'react'
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate
-} from "react-router-dom";
+import React, { Fragment, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-import { getAuth } from "firebase/auth";
+import { getAuth } from 'firebase/auth'
 
 import { Meeting } from './Pages/Meeting/Meeting'
 import { Review } from './Pages/Review/Review'
@@ -16,21 +11,26 @@ import { FourOFour } from './Pages/404/404'
 import { Member } from './Interfaces/Member'
 
 import * as Style from './style'
-import { getMemberInfoByUserId } from 'ApiService/Members';
+import { getMemberInfoByUserId } from 'ApiService/Members'
 
-const App:React.FC = () => {
-
-  const [loginInfo, setLoginInfo] = React.useState<Member>({isAdmin:false, name: '', userId: '', email: '', id: undefined, updateAt: ''})
+const App: React.FC = () => {
+  const [loginInfo, setLoginInfo] = React.useState<Member>({
+    isAdmin: false,
+    name: '',
+    userId: '',
+    email: '',
+    id: undefined,
+    updateAt: '',
+  })
 
   useEffect(() => {
-    getAuth().onAuthStateChanged((user) => {
+    getAuth().onAuthStateChanged(user => {
       // TODO: remove console.log when deploy project
       if (user) {
-        console.log("authenticated", user);
-        getMemberInfoByUserId(user.uid)
-          .then(res => setLoginInfo(res))
+        console.log('authenticated', user)
+        getMemberInfoByUserId(user.uid).then(res => setLoginInfo(res))
       } else {
-        console.log("signed out");
+        console.log('signed out')
       }
     })
   }, [])
@@ -40,18 +40,24 @@ const App:React.FC = () => {
       <BrowserRouter>
         <React.Fragment>
           <Routes>
-            <Route path='/signup' element={<SignUp />} />
-            {loginInfo.id ?
-            <><Route path='/' element={<Meeting />} />
-            <Route path="/createReview" element={<Review loginInfo={loginInfo}/>}/>
-            <Route path="/admin" element={<Admin />} /></> :
-            <Route path='/404' element={<FourOFour />} />
-            }
+            <Route path="/signup" element={<SignUp />} />
+            {loginInfo.id ? (
+              <>
+                <Route path="/" element={<Meeting />} />
+                <Route
+                  path="/createReview"
+                  element={<Review loginInfo={loginInfo} />}
+                />
+                <Route path="/admin" element={<Admin />} />
+              </>
+            ) : (
+              <Route path="/404" element={<FourOFour />} />
+            )}
           </Routes>
         </React.Fragment>
       </BrowserRouter>
     </Style.Background>
-  );
+  )
 }
 
-export default App;
+export default App

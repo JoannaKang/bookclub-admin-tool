@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { Meeting } from '../model/meetings'
+import { Request, Response } from 'express'
+import Meeting from '../model/meetings'
 
-export async function getMeetingsInfo (req:Request, res:Response) {
+export async function getMeetingsInfo(req: Request, res: Response) {
   try {
     const meetings = await Meeting.findAll()
     res.status(200).json(meetings)
@@ -10,14 +10,14 @@ export async function getMeetingsInfo (req:Request, res:Response) {
   }
 }
 
-export async function createMeeting (req:Request, res:Response) {
+export async function createMeeting(req: Request, res: Response) {
   try {
     const { location, locationReview, introduction, adminId } = req.body
     const newMeeting = await Meeting.create({
-      location: location, 
-      locationReview: locationReview,
-      introduction: introduction,
-      adminId: adminId
+      location,
+      locationReview,
+      introduction,
+      adminId,
     })
     res.status(200).json(newMeeting)
   } catch (error) {

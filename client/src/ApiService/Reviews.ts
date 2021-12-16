@@ -7,9 +7,9 @@ export const createReview = (review: Review) => {
     fetch(BASE_URL + '/reviews/createReview', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(review)
+      body: JSON.stringify(review),
     })
   } catch (error) {
     console.log(error)
