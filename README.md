@@ -11,7 +11,7 @@ npm start
   - Create mysql database: Use `npm run db:pre-migrate` command with mysql password
   ```
   // If mysql password is "password"
-  npm run db:pre-migrate:password
+  PASSWORD=password npm run db:pre-migrate
   ```
   - Create tables
   ```
@@ -47,7 +47,7 @@ npm start
   | ------- | ---------------------------------------- | ------------- | --- | ------ |
   | Members | getMembersInfo<br>getMembersInfoByUserId | createMember  |     |        |
   | Reviews | getReviewByUser                          | createReview  |     |        |
-  | Meeting | getMeetingInfo                           | createMeeting |     |        |
+  | Meeting | getMeetingInfo<br>getMeetingsInfoByUser  | createMeeting |     |        |
 
   <br>
 

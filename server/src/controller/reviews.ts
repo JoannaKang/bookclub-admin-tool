@@ -14,19 +14,35 @@ export async function getReviewByUser(req: Request, res: Response) {
 export async function createReview(req: Request, res: Response) {
   const { memberId, meetingId, title, author, rate, review, genre } = req.body
   // create new review
-  const newReview = await Review.create({
-    memberId,
-    meetingId,
-    title,
-    author,
-    rate,
-    review,
-    genre,
-  })
+  let newReview
+  let meetingAndMemberId
+  try {
+    newReview = await Review.create({
+      memberId,
+      meetingId,
+      title,
+      author,
+      rate,
+      review,
+      genre,
+    })
+  } catch (error) {
+    res.status(500).send({ error: 'Failed to create new review' })
+    return
+  }
+
+  try {
+    meetingAndMemberId = await MeetingMemberMapping.create({
+      memberId,
+      meetingId,
+    })
+  } catch (error) {
+    console.log('Failed to add MeetingMemberMapping')
+    res
+      .status(500)
+      .send({error: 'Can not save review twice in the same meeting'})
+    return
+  }
   // save meetingID /memeberID in mapping table
-  const meetingAndMemberId = await MeetingMemberMapping.create({
-    memberId,
-    meetingId,
-  })
   res.status(200).json({ newReview, meetingAndMemberId })
 }

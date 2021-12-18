@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 import { getAuth } from 'firebase/auth'
 
 import { Meeting } from './Pages/Meeting/Meeting'
@@ -14,6 +16,7 @@ import * as Style from './style'
 import { getMemberInfoByUserId } from './ApiService/Members'
 
 const App: React.FC = () => {
+  const theme = createTheme()
   const [loginInfo, setLoginInfo] = React.useState<Member>({
     isAdmin: false,
     name: '',
@@ -36,6 +39,7 @@ const App: React.FC = () => {
   }, [])
 
   return (
+    <ThemeProvider theme={theme}>
     <Style.Background>
       <BrowserRouter>
         <React.Fragment>
@@ -52,6 +56,7 @@ const App: React.FC = () => {
         </React.Fragment>
       </BrowserRouter>
     </Style.Background>
+    </ThemeProvider>
   )
 }
 

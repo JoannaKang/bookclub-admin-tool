@@ -17,16 +17,15 @@ import {
   signUpWithGoogleId,
   signInWithEmail,
 } from '../../Firebase'
-import { getAuth } from 'firebase/auth'
 
-export const SignUp = user => {
+export const SignUp:React.FC = (): JSX.Element => {
   const theme = createTheme()
   const navigate = useNavigate()
   const initialState = { name: '', email: '', password: '' }
   const [loginInfo, setLoginInfo] = React.useState(initialState)
   const [isSignUp, setIsSignUp] = React.useState(true)
 
-  const submitEmail = e => {
+  const submitEmail = (e:React.MouseEvent<HTMLElement>):void => {
     e.preventDefault()
     signUpWithEmail(loginInfo.email, loginInfo.password).then(res => {
       const memberInfo = {
@@ -41,7 +40,7 @@ export const SignUp = user => {
     })
   }
 
-  const submitGoogle = async e => {
+  const submitGoogle = async (e:React.MouseEvent<HTMLElement>):Promise<void> => {
     e.preventDefault()
     signUpWithGoogleId().then(res => {
       const memberInfo = {
@@ -56,10 +55,10 @@ export const SignUp = user => {
     })
   }
 
-  function handleChange(e) {
+  function handleChange(e:React.ChangeEvent<HTMLInputElement>) {
     setLoginInfo(() => ({
       ...loginInfo,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value as string,
     }))
   }
 
@@ -92,7 +91,7 @@ export const SignUp = user => {
                 name="name"
                 autoComplete="name"
                 autoFocus
-                onChange={e => handleChange(e)}
+                onChange={e => handleChange(e as React.ChangeEvent<HTMLInputElement>)}
               />
             ) : (
               <></>
@@ -106,7 +105,7 @@ export const SignUp = user => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={e => handleChange(e)}
+              onChange={e => handleChange(e as React.ChangeEvent<HTMLInputElement>)}
             />
             <TextField
               margin="normal"
@@ -117,7 +116,7 @@ export const SignUp = user => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={e => handleChange(e)}
+              onChange={e => handleChange(e as React.ChangeEvent<HTMLInputElement>)}
             />
             <Button
               type="submit"
