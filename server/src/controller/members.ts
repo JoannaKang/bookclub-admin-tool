@@ -16,11 +16,12 @@ export async function getMemberInfoByUserId(req: Request, res: Response) {
   try {
     const member = await Members.findAll({
       where: {
-        userId: req.params.userId,
+        userId: req.params.memberId,
       },
     })
     res.status(200).json(member)
   } catch (error) {
+    console.log('getMemberInfoByUserId', error)
     res.status(500).json(error)
   }
 }

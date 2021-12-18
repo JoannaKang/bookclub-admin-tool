@@ -2,7 +2,7 @@ const mysql = require('mysql2/promise')
 
 const dbName = 'bookclub'
 
-password = process.argv[2]
+password = process.env['PASSWORD']
 
 mysql
   .createConnection({
