@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import Review from '../model/reviews'
+import MeetingMemberMapping from '../model/meetingMemberMapping'
 
 export async function getReviewByUser(req: Request, res: Response) {
   const reviews = await Review.findAll({
@@ -12,6 +13,7 @@ export async function getReviewByUser(req: Request, res: Response) {
 
 export async function createReview(req: Request, res: Response) {
   const { memberId, meetingId, title, author, rate, review, genre } = req.body
+  // create new review
   const newReview = await Review.create({
     memberId,
     meetingId,
@@ -21,6 +23,10 @@ export async function createReview(req: Request, res: Response) {
     review,
     genre,
   })
-  // TODO: mapping table에 meetingID /memeberID 저장하기
-  res.status(200).json(newReview)
+  // save meetingID /memeberID in mapping table
+  const meetingAndMemberId = await MeetingMemberMapping.create({
+    memberId,
+    meetingId,
+  })
+  res.status(200).json({ newReview, meetingAndMemberId })
 }

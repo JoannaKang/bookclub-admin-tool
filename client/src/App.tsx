@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { getAuth } from 'firebase/auth'
 
@@ -11,7 +11,7 @@ import { FourOFour } from './Pages/404/404'
 import { Member } from './Interfaces/Member'
 
 import * as Style from './style'
-import { getMemberInfoByUserId } from 'ApiService/Members'
+import { getMemberInfoByUserId } from './ApiService/Members'
 
 const App: React.FC = () => {
   const [loginInfo, setLoginInfo] = React.useState<Member>({
@@ -41,18 +41,13 @@ const App: React.FC = () => {
         <React.Fragment>
           <Routes>
             <Route path="/signup" element={<SignUp />} />
-            {loginInfo.id ? (
-              <>
-                <Route path="/" element={<Meeting />} />
-                <Route
-                  path="/createReview"
-                  element={<Review loginInfo={loginInfo} />}
-                />
-                <Route path="/admin" element={<Admin />} />
-              </>
-            ) : (
-              <Route path="/404" element={<FourOFour />} />
-            )}
+            <Route path="/" element={<Meeting />} />
+            <Route
+              path="/createReview"
+              element={<Review loginInfo={loginInfo} />}
+            />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/404" element={<FourOFour />} />
           </Routes>
         </React.Fragment>
       </BrowserRouter>

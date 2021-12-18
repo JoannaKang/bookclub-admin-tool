@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
@@ -16,12 +16,12 @@ import {
   signUpWithEmail,
   signUpWithGoogleId,
   signInWithEmail,
-} from '../../Firebase.js'
+} from '../../Firebase'
+import { getAuth } from 'firebase/auth'
 
-export const SignUp = () => {
+export const SignUp = user => {
   const theme = createTheme()
   const navigate = useNavigate()
-  const navigateToReview = () => navigate('/createReview')
   const initialState = { name: '', email: '', password: '' }
   const [loginInfo, setLoginInfo] = React.useState(initialState)
   const [isSignUp, setIsSignUp] = React.useState(true)
@@ -37,25 +37,23 @@ export const SignUp = () => {
       }
       createMemberInfo(memberInfo)
       alert(` Hello ${memberInfo.name} !`)
-      navigateToReview()
+      navigate('/createReview')
     })
   }
 
   const submitGoogle = async e => {
     e.preventDefault()
-    const loginUser = await signUpWithGoogleId().then(res => {
-      console.log(res)
-      return {
+    signUpWithGoogleId().then(res => {
+      const memberInfo = {
         userId: res?.uid,
         email: res?.email,
         name: res?.displayName,
         isAdmin: false,
       }
+      createMemberInfo(memberInfo)
+      alert(` Hello ${memberInfo.name} !`)
+      navigate('/createReview')
     })
-
-    createMemberInfo(loginUser)
-    alert(` Hello ${loginUser.name} !`)
-    navigateToReview()
   }
 
   function handleChange(e) {

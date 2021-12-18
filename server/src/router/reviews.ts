@@ -4,6 +4,6 @@ import * as reviewsController from '../controller/reviews'
 const router = express.Router()
 
 router.get('/:id', reviewsController.getReviewByUser)
-router.post('/createReview', reviewsController.createReview)
+router.post('/review', reviewsController.createReview)
 
 export default router

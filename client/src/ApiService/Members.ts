@@ -11,7 +11,7 @@ export const getMemberInfoByUserId = async (
 }
 
 export const createMemberInfo = (memberInfo: Member) => {
-  fetch(BASE_URL + '/members/createMember', {
+  fetch(BASE_URL + '/members/member', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

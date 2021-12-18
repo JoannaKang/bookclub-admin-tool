@@ -4,7 +4,7 @@ const BASE_URL = 'http://localhost:8080'
 
 export const createReview = (review: Review) => {
   try {
-    fetch(BASE_URL + '/reviews/createReview', {
+    fetch(BASE_URL + '/reviews/review', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

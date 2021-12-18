@@ -29,11 +29,5 @@ const Meeting = sequelize.define('meeting', {
   },
 })
 
-Meeting.belongsToMany(Member, {
-  through: 'meeting_member_mapping',
-})
-Member.belongsToMany(Meeting, {
-  through: 'meeting_member_mapping',
-})
 
 export default Meeting

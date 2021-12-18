@@ -17,7 +17,7 @@ import { createReview } from '../../ApiService/Reviews'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useEffect } from 'react'
 
-export const Review = ({ loginInfo }) => {
+export const Review:React.FC<any> = ({ loginInfo }):JSX.Element => {
   console.log(loginInfo)
   const theme = createTheme()
   const CATEGORY = [
@@ -47,11 +47,12 @@ export const Review = ({ loginInfo }) => {
 
   const [review, setReview] = React.useState(initialReviewState)
   const [meetingOption, setMeetingOption] = React.useState([
-    initialMeetingOptionState,
+    initialMeetingOptionState
   ])
 
   useEffect(() => {
-    getMeetingDates().then(dates => setMeetingOption(dates))
+    getMeetingDates().then(dates => {
+      setMeetingOption(dates)})
   }, [])
 
   function handleChanges(e) {
