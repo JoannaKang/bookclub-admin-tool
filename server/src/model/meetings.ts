@@ -1,26 +1,32 @@
 import SQ from 'sequelize'
-import { sequelize } from '../db/database'
-import { Member } from './members'
-const DataTypes = SQ.DataTypes
-const Sequelize = SQ.Sequelize;
+import sequelize from '../db/database'
+import Member from './members'
 
-export const Meeting = sequelize.define(
-  'meeting', 
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true
-    },
-    location: {
-      type: DataTypes.STRING(200),
-      allowNull: false
-    },
-    introduction: {
-      type: DataTypes.STRING(200),
-      allowNull: false
-    }
-  })
+const { DataTypes } = SQ
 
-  Meeting.belongsTo(Member)
+const Meeting = sequelize.define('meeting', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  location: {
+    type: DataTypes.STRING(200),
+    allowNull: false,
+  },
+  introduction: {
+    type: DataTypes.STRING(200),
+    allowNull: false,
+  },
+  locationReview: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  adminId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+})
+
+export default Meeting

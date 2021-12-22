@@ -1,22 +1,31 @@
 import SQ from 'sequelize'
-import { sequelize } from '../db/database'
-const DataTypes = SQ.DataTypes
+import sequelize from '../db/database'
 
-export const Member = sequelize.define(
-  'member', 
-  {
+const { DataTypes } = SQ
+
+const Member = sequelize.define('member', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
-  username: {
+  userId: {
     type: DataTypes.STRING(45),
-    allowNull: false
+    allowNull: false,
   },
-  attendance: {
-    type: DataTypes.DATE,
-    allowNull: false
-  }
+  email: {
+    type: DataTypes.STRING(45),
+    allowNull: false,
+  },
+  name: {
+    type: DataTypes.STRING(45),
+    allowNull: false,
+  },
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
 })
+
+export default Member

@@ -1,8 +1,9 @@
 import express from 'express'
-import * as membersController from '../controller/reviews'
+import * as reviewsController from '../controller/reviews'
 
 const router = express.Router()
 
-router.get('/', membersController.getReviewInfo)
+router.get('/:id', reviewsController.getReviewByUser)
+router.post('/review', reviewsController.createReview)
 
 export default router
