@@ -4,6 +4,7 @@
   "description": "* In `src/client`: Launch server in 3000 ``` npm start ``` * In `src/server`: Launch server in 8080    * Install mysql server in local machine    * Create mysql database: Use `npm run db:pre-migrate` command with mysql password     ```     // If mysql password is \"password\"     npm run db:pre-migrate:password     ```    * Create tables     ```       npm run dev     ```",
   "main": ".eslintrc.js",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "eslint": "^8.5.0",
     "react-router-dom": "^6.0.2"
   },

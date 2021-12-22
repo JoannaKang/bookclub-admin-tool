@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise')
 
-const dbName = 'bookclub'
+const dbName = process.env.DB_DATABASE
 
 password = process.env['PASSWORD']
 
