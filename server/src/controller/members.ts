@@ -29,9 +29,9 @@ export async function getMemberInfoByUserId(req: Request, res: Response) {
 
 export async function createMember(req: Request, res: Response) {
   const errors = validationResult(req)
-  console.log(errors)
 
   if (!errors.isEmpty()) {
+    console.log('isEmpty', res.status(400).json({ errors: errors.array() }))
     return res.status(400).json({ errors: errors.array() })
   }
 
@@ -41,8 +41,9 @@ export async function createMember(req: Request, res: Response) {
       userId,
     },
   })
+
   if (member.length > 0) {
-    res.status(200).json(member[0])
+    return res.status(200).json(member[0])
   } else {
     const newMember = await Members.create({
       userId,
@@ -50,6 +51,6 @@ export async function createMember(req: Request, res: Response) {
       name,
       isAdmin,
     })
-    res.status(200).json(newMember)
+    return res.status(200).json(newMember)
   }
 }

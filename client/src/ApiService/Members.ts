@@ -9,6 +9,8 @@ export const getMemberInfoByUserId = async (
   return user.length > 0 ? user[0] : undefined
 }
 
-export const createMemberInfo = (memberInfo: Member) => {
-  HttpRequest.post('/members', memberInfo)
+export const createMemberInfo = async (memberInfo: Member) => {
+  const response = await HttpRequest.post('/members', memberInfo)
+  console.log('in apiservice', response)
+  return response
 }

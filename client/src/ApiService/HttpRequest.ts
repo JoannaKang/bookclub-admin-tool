@@ -2,7 +2,7 @@ export class HttpRequest {
   public static BASE_URL = 'http://localhost:8080'
 
   static async post(url: string, payload: any): Promise<any> {
-    await fetch(this.BASE_URL + url, {
+    return await fetch(this.BASE_URL + url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -12,7 +12,8 @@ export class HttpRequest {
       async res => {
         if (res.status >= 200) {
           const json = await res.json()
-          alert(json.error)
+          console.log('in httprequest', json)
+          return json
         } else {
           alert('saved successfully')
         }

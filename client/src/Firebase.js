@@ -20,10 +20,10 @@ export const firebaseConfig = {
 initializeApp(firebaseConfig)
 
 const provider = new GoogleAuthProvider()
+const auth = getAuth()
 
 export const signUpWithEmail = async (email, password) => {
   try {
-    const auth = getAuth()
     const newUser = await createUserWithEmailAndPassword(auth, email, password)
     return newUser.user
   } catch (error) {
@@ -34,12 +34,10 @@ export const signUpWithEmail = async (email, password) => {
   }
 }
 
-export const signInWithEmail = (email, password) => {
+export const signInWithEmail = async (email, password) => {
   try {
-    const auth = getAuth()
-    signInWithEmailAndPassword(auth, email, password).then(res =>
-      console.log(res.user),
-    )
+    const newUser = signInWithEmailAndPassword(auth, email, password)
+    return newUser.user
   } catch (error) {
     const errorCode = error.code
     const errorMessage = error.message
@@ -50,7 +48,6 @@ export const signInWithEmail = (email, password) => {
 
 export const signUpWithGoogleId = async () => {
   try {
-    const auth = getAuth()
     const loginUser = await signInWithPopup(auth, provider)
     return loginUser.user
   } catch (error) {
