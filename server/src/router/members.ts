@@ -6,11 +6,13 @@ const router = express.Router()
 
 router.get('/', membersController.getMembersInfo)
 router.get('/:memberId', membersController.getMemberInfoByUserId)
-router.post('/', 
+router.post(
+  '/',
   body('userId').not().isEmpty().trim().escape(),
   body('name').not().isEmpty().trim().escape(),
   body('email').isEmail().normalizeEmail(),
   body('isAdmin').toBoolean(),
-  membersController.createMember)
+  membersController.createMember,
+)
 
 export default router

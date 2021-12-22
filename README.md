@@ -7,13 +7,28 @@ npm start
 ```
 
 - In `src/server`: Launch server in 8080
+
   - Install mysql server in local machine
+  - Create `.env` file in the root directory and save following environment variables
+
+  ```
+  SKIP_PREFLIGHT_CHECK=true
+  DISABLE_ESLINT_PLUGIN=true
+  DB_HOST=your_localhost_number
+  DB_USER=your_database_username
+  DB_DATABASE=your_database_name
+  DB_PASSWORD=your_database_password
+  ```
+
   - Create mysql database: Use `npm run db:pre-migrate` command with mysql password
+
   ```
   // If mysql password is "password"
   PASSWORD=password npm run db:pre-migrate
   ```
+
   - Create tables
+
   ```
     npm run dev
   ```

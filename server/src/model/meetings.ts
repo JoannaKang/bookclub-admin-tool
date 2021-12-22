@@ -29,5 +29,4 @@ const Meeting = sequelize.define('meeting', {
   },
 })
 
-
 export default Meeting

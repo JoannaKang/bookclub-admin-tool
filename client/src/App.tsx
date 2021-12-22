@@ -40,22 +40,22 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <Style.Background>
-      <BrowserRouter>
-        <React.Fragment>
-          <Routes>
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/" element={<Meeting />} />
-            <Route
-              path="/createReview"
-              element={<Review loginInfo={loginInfo} />}
-            />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/404" element={<FourOFour />} />
-          </Routes>
-        </React.Fragment>
-      </BrowserRouter>
-    </Style.Background>
+      <Style.Background>
+        <BrowserRouter>
+          <React.Fragment>
+            <Routes>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/" element={<Meeting />} />
+              <Route
+                path="/createReview"
+                element={<Review loginInfo={loginInfo} />}
+              />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/404" element={<FourOFour />} />
+            </Routes>
+          </React.Fragment>
+        </BrowserRouter>
+      </Style.Background>
     </ThemeProvider>
   )
 }

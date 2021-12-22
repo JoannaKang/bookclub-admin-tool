@@ -40,7 +40,7 @@ export async function createReview(req: Request, res: Response) {
     console.log('Failed to add MeetingMemberMapping')
     res
       .status(500)
-      .send({error: 'Can not save review twice in the same meeting'})
+      .send({ error: 'Can not save review twice in the same meeting' })
     return
   }
   // save meetingID /memeberID in mapping table

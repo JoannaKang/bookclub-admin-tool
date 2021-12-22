@@ -32,9 +32,9 @@ export async function createMember(req: Request, res: Response) {
   console.log(errors)
 
   if (!errors.isEmpty()) {
-    return res.status(400).json({errors: errors.array()})
+    return res.status(400).json({ errors: errors.array() })
   }
-  
+
   const { userId, email, name, isAdmin } = req.body
   const member = await Members.findAll({
     where: {

@@ -53,7 +53,7 @@ export const Review: React.FC<any> = ({ loginInfo }): JSX.Element => {
     })
   }, [])
 
-  function handleChanges(e:React.ChangeEvent<HTMLInputElement>) {
+  function handleChanges(e: React.ChangeEvent<HTMLInputElement>) {
     setReview(review => ({
       ...review,
       [e.target.name]: e.target.value as string,
@@ -83,7 +83,9 @@ export const Review: React.FC<any> = ({ loginInfo }): JSX.Element => {
               label="meetingId"
               name="meetingId"
               defaultValue=""
-              onChange={(e) => handleChanges(e as React.ChangeEvent<HTMLInputElement>)}
+              onChange={e =>
+                handleChanges(e as React.ChangeEvent<HTMLInputElement>)
+              }
             >
               {meetingOption?.map((item, index) => (
                 <MenuItem key={index} value={item.meetingId}>
@@ -98,14 +100,18 @@ export const Review: React.FC<any> = ({ loginInfo }): JSX.Element => {
           name="title"
           variant="standard"
           margin="normal"
-          onChange={e => handleChanges(e as React.ChangeEvent<HTMLInputElement>)}
+          onChange={e =>
+            handleChanges(e as React.ChangeEvent<HTMLInputElement>)
+          }
         />
         <TextField
           label="Author"
           name="author"
           variant="standard"
           margin="normal"
-          onChange={e => handleChanges(e as React.ChangeEvent<HTMLInputElement>)}
+          onChange={e =>
+            handleChanges(e as React.ChangeEvent<HTMLInputElement>)
+          }
         />
         <Box sx={{ minWidth: 200 }} padding={[2, 0, 1, 0]}>
           <FormControl fullWidth>
@@ -116,7 +122,9 @@ export const Review: React.FC<any> = ({ loginInfo }): JSX.Element => {
               label="Genre"
               name="genre"
               defaultValue=""
-              onChange={e => handleChanges(e as React.ChangeEvent<HTMLInputElement>)}
+              onChange={e =>
+                handleChanges(e as React.ChangeEvent<HTMLInputElement>)
+              }
             >
               {CATEGORY.map((item, index) => (
                 <MenuItem key={index} value={item}>
@@ -134,12 +142,19 @@ export const Review: React.FC<any> = ({ loginInfo }): JSX.Element => {
             rows={6}
             placeholder="Write your review"
             style={{ width: 200 }}
-            onChange={e => handleChanges(e as React.ChangeEvent<HTMLInputElement>)}
+            onChange={e =>
+              handleChanges(e as React.ChangeEvent<HTMLInputElement>)
+            }
           />
         </Box>
         <Box sx={{ minWidth: 200, alignItems: 'center' }} padding={1}>
           <Typography component="legend">Rate</Typography>
-          <Rating name="rate" onChange={e => handleChanges(e as React.ChangeEvent<HTMLInputElement>)} />
+          <Rating
+            name="rate"
+            onChange={e =>
+              handleChanges(e as React.ChangeEvent<HTMLInputElement>)
+            }
+          />
         </Box>
         <Button
           variant="contained"

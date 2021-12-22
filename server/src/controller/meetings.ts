@@ -17,13 +17,13 @@ export async function getMeetingsInfoByUser(req: Request, res: Response) {
     const { userId } = req.body
     const meetingIds = await MeetingMemberMapping.findAll({
       attributes: ['meetingId'],
-      where: userId
+      where: userId,
     })
     const meetingIdOnly = (meetingIds as any[]).map(r => r.meetingId)
 
-    const Op = SQ.Op;
+    const Op = SQ.Op
     const meetingInfo = await Meeting.findAll({
-      where: {id: {[Op.or]: meetingIdOnly}}
+      where: { id: { [Op.or]: meetingIdOnly } },
     })
 
     res.status(200).json(meetingInfo)
