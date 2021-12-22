@@ -10,5 +10,5 @@ export const getMemberInfoByUserId = async (
 }
 
 export const createMemberInfo = (memberInfo: Member) => {
-  HttpRequest.post('/members/member', memberInfo)
+  HttpRequest.post('/members', memberInfo)
 }

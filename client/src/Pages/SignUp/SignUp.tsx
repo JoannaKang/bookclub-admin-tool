@@ -27,7 +27,14 @@ export const SignUp:React.FC = (): JSX.Element => {
 
   const submitEmail = (e:React.MouseEvent<HTMLElement>):void => {
     e.preventDefault()
-    signUpWithEmail(loginInfo.email, loginInfo.password).then(res => {
+
+    if (!loginInfo.name) {
+      alert('Please enter name')
+      throw Error
+    }
+
+    signUpWithEmail(loginInfo.email, loginInfo.password)
+    .then(res => {
       const memberInfo = {
         userId: res?.uid,
         email: res?.email,
@@ -81,8 +88,8 @@ export const SignUp:React.FC = (): JSX.Element => {
             Sign Up
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
-            {isSignUp ? (
-              <TextField
+            {isSignUp && 
+              (<TextField
                 margin="normal"
                 required
                 fullWidth
@@ -92,10 +99,8 @@ export const SignUp:React.FC = (): JSX.Element => {
                 autoComplete="name"
                 autoFocus
                 onChange={e => handleChange(e as React.ChangeEvent<HTMLInputElement>)}
-              />
-            ) : (
-              <></>
-            )}
+              />)
+            }
             <TextField
               margin="normal"
               required
@@ -139,24 +144,25 @@ export const SignUp:React.FC = (): JSX.Element => {
               sx={{ mt: 3, mb: 2 }}
               onClick={submitGoogle}
             >
-              {' '}
-              Sign Up with Google id{' '}
+              Sign Up with Google id
             </Button>
             <Grid container>
               <Grid item xs>
                 {isSignUp ? (
                   <Link
-                    href="#"
                     variant="body2"
-                    onClick={() => setIsSignUp(!isSignUp)}
+                    onClick={() => {
+                      setIsSignUp(!isSignUp)
+                    }}
                   >
                     Already have account?
                   </Link>
                 ) : (
                   <Link
-                    href="#"
                     variant="body2"
-                    onClick={() => setIsSignUp(!isSignUp)}
+                    onClick={() => {
+                      setIsSignUp(!isSignUp)
+                    }}
                   >
                     Forgot password?
                   </Link>

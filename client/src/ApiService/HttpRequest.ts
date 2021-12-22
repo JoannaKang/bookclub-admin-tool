@@ -14,7 +14,7 @@ export class HttpRequest {
           const json = await res.json()
           alert(json.error)
         } else {
-          alert('savedd successfully')
+          alert('saved successfully')
         }
       },
       () => {

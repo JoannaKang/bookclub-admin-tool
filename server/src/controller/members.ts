@@ -1,4 +1,6 @@
 import { Request, Response } from 'express'
+import { validationResult } from 'express-validator'
+
 import Member from '../model/members'
 
 const Members = Member
@@ -21,12 +23,18 @@ export async function getMemberInfoByUserId(req: Request, res: Response) {
     })
     res.status(200).json(member)
   } catch (error) {
-    console.log('getMemberInfoByUserId', error)
     res.status(500).json(error)
   }
 }
 
 export async function createMember(req: Request, res: Response) {
+  const errors = validationResult(req)
+  console.log(errors)
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({errors: errors.array()})
+  }
+  
   const { userId, email, name, isAdmin } = req.body
   const member = await Members.findAll({
     where: {
