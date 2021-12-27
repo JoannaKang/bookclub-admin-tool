@@ -11,6 +11,13 @@ export const getMemberInfoByUserId = async (
 
 export const createMemberInfo = async (memberInfo: Member) => {
   const response = await HttpRequest.post('/members', memberInfo)
-  console.log('in apiservice', response)
-  return response
+  if (response.errors) {
+    throw Error
+  }
+
+  try {
+    return response
+  } catch (Error) {
+    console.error(Error)
+  }
 }

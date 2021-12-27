@@ -27,23 +27,23 @@ const App: React.FC = () => {
     updateAt: '',
   })
 
-  // useEffect(() => {
-  //   getAuth().onAuthStateChanged(user => {
-  //     // TODO: remove console.log when deploy project
-  //     if (user) {
-  //       console.log('authenticated', user)
-  //       getMemberInfoByUserId(user.uid).then(res => setLoginInfo(res))
-  //     } else { 
-  //       console.log('signed out')
-  //     }
-  //   })
-  // }, [])
+  useEffect(() => {
+    getAuth().onAuthStateChanged(user => {
+      // TODO: remove console.log when deploy project
+      if (user) {
+        console.log('authenticated', user)
+        getMemberInfoByUserId(user.uid).then(res => setLoginInfo(res))
+      } else { 
+        console.log('signed out')
+      }
+    })
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
     <GlobalStyle />
       <NavBar />
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <React.Fragment>
           <Routes>
             <Route path="/signup" element={<SignUp />} />
@@ -56,7 +56,7 @@ const App: React.FC = () => {
             <Route path="/404" element={<FourOFour />} />
           </Routes>
         </React.Fragment>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </ThemeProvider>
   )
 }

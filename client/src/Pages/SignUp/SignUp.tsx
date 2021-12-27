@@ -61,21 +61,24 @@ export const SignUp: React.FC = (): JSX.Element => {
     alert(` Successfully logged in!`)
     navigate('/createReview')
   }
+
   const submitGoogle = async (
     e: React.MouseEvent<HTMLElement>,
   ): Promise<void> => {
     e.preventDefault()
-    signUpWithGoogleId().then(res => {
-      const memberInfo = {
-        userId: res?.uid,
-        email: res?.email,
-        name: res?.displayName,
-        isAdmin: false,
-      }
-      createMemberInfo(memberInfo)
-      alert(` Hello ${memberInfo.name} !`)
-      navigate('/createReview')
-    })
+    const createdUserInFirebase = await signUpWithGoogleId()
+    
+    const memberInfo = {
+      userId: createdUserInFirebase?.uid,
+      email: createdUserInFirebase?.email,
+      name: createdUserInFirebase?.displayName,
+      isAdmin: false,
+    }
+    
+    await createMemberInfo(memberInfo)
+    
+    alert(` Hello ${memberInfo.name} !`)
+    navigate('/createReview')
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

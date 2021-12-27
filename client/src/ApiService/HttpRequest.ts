@@ -12,7 +12,6 @@ export class HttpRequest {
       async res => {
         if (res.status >= 200) {
           const json = await res.json()
-          console.log('in httprequest', json)
           return json
         } else {
           alert('saved successfully')
