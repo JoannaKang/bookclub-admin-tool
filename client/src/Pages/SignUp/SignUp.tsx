@@ -67,16 +67,16 @@ export const SignUp: React.FC = (): JSX.Element => {
   ): Promise<void> => {
     e.preventDefault()
     const createdUserInFirebase = await signUpWithGoogleId()
-    
+
     const memberInfo = {
       userId: createdUserInFirebase?.uid,
       email: createdUserInFirebase?.email,
       name: createdUserInFirebase?.displayName,
       isAdmin: false,
     }
-    
+
     await createMemberInfo(memberInfo)
-    
+
     alert(` Hello ${memberInfo.name} !`)
     navigate('/createReview')
   }

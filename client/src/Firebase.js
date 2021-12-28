@@ -8,7 +8,7 @@ import {
 } from 'firebase/auth'
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyCmBrVHLIaw24Dr5PL9-RXGVYbF2wd8osc',
+  apiKey: process.env.REACT_APP_FB_APIKEY,
   authDomain: 'bookclub-admin-tool.firebaseapp.com',
   projectId: 'bookclub-admin-tool',
   storageBucket: 'bookclub-admin-tool.appspot.com',

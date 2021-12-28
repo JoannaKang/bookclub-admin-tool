@@ -1,4 +1,4 @@
-import { createGlobalStyle} from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -33,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans JP', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, ul {
     margin: 0;
   }
 

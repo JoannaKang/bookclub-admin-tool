@@ -3,7 +3,17 @@ import { Wrapper } from './style/style'
 const NavBar = () => {
   return (
     <Wrapper>
-      <h1>NavBar</h1>
+      <ul>
+        <li>
+          <a href="/">MAIN</a>
+        </li>
+        <li>
+          <a href="/createReview">REVIEW</a>
+        </li>
+        <li>
+          <a href="/admin">ADMIN</a>
+        </li>
+      </ul>
     </Wrapper>
   )
 }

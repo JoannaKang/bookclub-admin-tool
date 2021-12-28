@@ -12,9 +12,12 @@ import { Admin } from './Pages/Admin/Admin'
 import { FourOFour } from './Pages/404/404'
 import { Member } from './Interfaces/Member'
 
+import AuthorizedApp from './Apps/Authorized/UserApp'
+import UnAuthrizedApp from './Apps/Unauthorized/UnAuthorizedApp'
+
 import GlobalStyle from './style'
 import { getMemberInfoByUserId } from './ApiService/Members'
-import NavBar from 'Components/NavBar/NavBar'
+import NavBar from './Components/NavBar/NavBar'
 
 const App: React.FC = () => {
   const theme = createTheme()
@@ -33,7 +36,7 @@ const App: React.FC = () => {
       if (user) {
         console.log('authenticated', user)
         getMemberInfoByUserId(user.uid).then(res => setLoginInfo(res))
-      } else { 
+      } else {
         console.log('signed out')
       }
     })
@@ -41,11 +44,13 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-    <GlobalStyle />
+      <GlobalStyle />
       <NavBar />
       <BrowserRouter>
         <React.Fragment>
-          <Routes>
+          {console.log(loginInfo)}
+          {loginInfo.id ? <AuthorizedApp /> : <UnAuthrizedApp />}
+          {/* <Routes>
             <Route path="/signup" element={<SignUp />} />
             <Route path="/" element={<Meeting />} />
             <Route
@@ -54,7 +59,7 @@ const App: React.FC = () => {
             />
             <Route path="/admin" element={<Admin />} />
             <Route path="/404" element={<FourOFour />} />
-          </Routes>
+          </Routes> */}
         </React.Fragment>
       </BrowserRouter>
     </ThemeProvider>
