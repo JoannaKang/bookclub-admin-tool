@@ -30,6 +30,8 @@ const App: React.FC = () => {
     updateAt: '',
   })
 
+  const LoginContext = React.createContext(loginInfo)
+
   useEffect(() => {
     getAuth().onAuthStateChanged(user => {
       // TODO: remove console.log when deploy project
@@ -48,18 +50,9 @@ const App: React.FC = () => {
       <NavBar />
       <BrowserRouter>
         <React.Fragment>
-          {console.log(loginInfo)}
-          {loginInfo.id ? <AuthorizedApp /> : <UnAuthrizedApp />}
-          {/* <Routes>
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/" element={<Meeting />} />
-            <Route
-              path="/createReview"
-              element={<Review loginInfo={loginInfo} />}
-            />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/404" element={<FourOFour />} />
-          </Routes> */}
+          <LoginContext.Provider value={loginInfo}>
+            {loginInfo.id ? <AuthorizedApp /> : <UnAuthrizedApp />}
+          </LoginContext.Provider>
         </React.Fragment>
       </BrowserRouter>
     </ThemeProvider>
