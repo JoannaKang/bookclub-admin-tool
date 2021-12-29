@@ -1,45 +1,54 @@
-import React, { Fragment, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import { getAuth } from 'firebase/auth'
-
-import { Meeting } from './Pages/Meeting/Meeting'
-import { Review } from './Pages/Review/Review'
-import { SignUp } from './Pages/SignUp/SignUp'
-import { Admin } from './Pages/Admin/Admin'
-import { FourOFour } from './Pages/404/404'
 import { Member } from './Interfaces/Member'
 
 import AuthorizedApp from './Apps/Authorized/UserApp'
 import UnAuthrizedApp from './Apps/Unauthorized/UnAuthorizedApp'
 
-import GlobalStyle from './style'
+import { GlobalStyle } from './GlobalStyle'
 import { getMemberInfoByUserId } from './ApiService/Members'
 import NavBar from './Components/NavBar/NavBar'
 
-const App: React.FC = () => {
-  const theme = createTheme()
-  const [loginInfo, setLoginInfo] = React.useState<Member>({
+function defaultLoginInfo() {
+  return {
     isAdmin: false,
     name: '',
     userId: '',
     email: '',
     id: undefined,
     updateAt: '',
-  })
+  }
+}
 
-  const LoginContext = React.createContext(loginInfo)
+export const LoginContext = React.createContext<Member>(defaultLoginInfo())
+
+const App: React.FC = () => {
+  const theme = createTheme()
+  const [loginInfo, setLoginInfo] = React.useState<Member>(defaultLoginInfo())
+
+  const queryLoginInfo = async user => {
+    const memberInfo = await getMemberInfoByUserId(user.uid)
+    if (memberInfo === undefined) {
+      console.log('user undefined')
+      setTimeout(queryLoginInfo, 10, user)
+    } else {
+      console.log('setting login info to: ', memberInfo)
+      setLoginInfo(memberInfo)
+    }
+  }
 
   useEffect(() => {
-    getAuth().onAuthStateChanged(user => {
+    getAuth().onAuthStateChanged(async user => {
       // TODO: remove console.log when deploy project
       if (user) {
-        console.log('authenticated', user)
-        getMemberInfoByUserId(user.uid).then(res => setLoginInfo(res))
+        queryLoginInfo(user)
       } else {
         console.log('signed out')
+        setLoginInfo(defaultLoginInfo())
       }
     })
   }, [])
@@ -47,14 +56,18 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <NavBar />
-      <BrowserRouter>
-        <React.Fragment>
-          <LoginContext.Provider value={loginInfo}>
-            {loginInfo.id ? <AuthorizedApp /> : <UnAuthrizedApp />}
-          </LoginContext.Provider>
-        </React.Fragment>
-      </BrowserRouter>
+      <LoginContext.Provider value={loginInfo}>
+        <BrowserRouter>
+          <NavBar />
+          <React.Fragment>
+            {loginInfo.id !== undefined ? (
+              <AuthorizedApp />
+            ) : (
+              <UnAuthrizedApp />
+            )}
+          </React.Fragment>
+        </BrowserRouter>
+      </LoginContext.Provider>
     </ThemeProvider>
   )
 }

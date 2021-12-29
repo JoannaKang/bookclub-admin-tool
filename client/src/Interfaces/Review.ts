@@ -1,5 +1,5 @@
 export interface Review {
-  memberId: string
+  memberId?: number
   meetingId: number
   title: string
   author: string

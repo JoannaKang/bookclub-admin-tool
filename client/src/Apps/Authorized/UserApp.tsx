@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { LoginContext } from '../../App'
 
 import { Meeting } from '../../Pages/Meeting/Meeting'
 import { Review } from '../../Pages/Review/Review'
@@ -11,13 +12,19 @@ import { Member } from '../../Interfaces/Member'
 const UserApp: FunctionComponent<any> = () => {
   console.log('userapp')
   return (
-    <>
-      <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<Meeting />} />
-        <Route path="/createReview" element={<Review />} />
-      </Routes>
-    </>
+    <LoginContext.Consumer>
+      {loginInfo => (
+        <>
+          <Routes>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/meeting" element={<Meeting />} />
+            <Route path="/createReview" element={<Review />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/" element={<FourOFour />} />
+          </Routes>
+        </>
+      )}
+    </LoginContext.Consumer>
   )
 }
 

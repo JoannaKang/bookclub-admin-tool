@@ -9,7 +9,7 @@ const UnauthorizedApp: FunctionComponent<any> = () => {
     <>
       <Routes>
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/404" element={<FourOFour />} />
+        <Route path="/" element={<FourOFour />} />
       </Routes>
     </>
   )

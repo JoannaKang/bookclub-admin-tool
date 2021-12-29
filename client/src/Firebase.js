@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -56,4 +57,15 @@ export const signUpWithGoogleId = async () => {
     const email = error.email
     alert(errorCode, errorMessage, email)
   }
+}
+
+export const signOutFirebase = navigate => {
+  signOut(auth)
+    .then(() => {
+      alert('Signed out')
+      navigate('/signup')
+    })
+    .catch(error => {
+      console.error(error)
+    })
 }

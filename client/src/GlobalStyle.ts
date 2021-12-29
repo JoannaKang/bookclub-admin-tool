@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -55,5 +55,14 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 `
-
-export default GlobalStyle
+export const colorTheme = {
+  blue: '#396EB0',
+  gree: '#BBDED6',
+  pink: '#FFB6B9',
+  paleblue: '#A6D0E4',
+  palegreen: '#F9FFEA',
+  palepink: '#FAE3D9',
+  white: '#EFEFEF',
+  grey: '#444444',
+  black: '#261C2C',
+}
