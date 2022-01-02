@@ -34,12 +34,14 @@ export async function getMeetingsInfoByUser(req: Request, res: Response) {
 
 export async function createMeeting(req: Request, res: Response) {
   try {
-    const { location, locationReview, introduction, adminId } = req.body
+    console.log(req.body)
+    const { location, locationReview, introduction, adminId, date } = req.body
     const newMeeting = await Meeting.create({
       location,
       locationReview,
       introduction,
       adminId,
+      date,
     })
     res.status(200).json(newMeeting)
   } catch (error) {

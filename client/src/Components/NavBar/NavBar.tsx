@@ -2,23 +2,25 @@ import { Wrapper } from './style/style'
 import { LoginContext } from '../../App'
 import Button from '@mui/material/Button'
 import { signOutFirebase } from '../../Firebase'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
   const navigate = useNavigate()
   return (
     <LoginContext.Consumer>
       {loginInfo => {
-        if (loginInfo.id !== undefined) {
+        if (loginInfo.id !== undefined && loginInfo.isAdmin) {
           return (
             <Wrapper>
-              {console.log('navbar', loginInfo)}
               <ul>
                 <li>
-                  <a href="/meeting">Meeting</a>
+                  <Link to="/meeting">Meeting</Link>
                 </li>
                 <li>
-                  <a href="/createReview">Review</a>
+                  <Link to="/createReview">Review</Link>
+                </li>
+                <li>
+                  <Link to="/admin">Admin</Link>
                 </li>
               </ul>
               <Button
@@ -29,22 +31,24 @@ const NavBar = () => {
               </Button>
             </Wrapper>
           )
-        } else if (loginInfo.id !== undefined && loginInfo.isAdmin) {
+        } else if (loginInfo.id !== undefined) {
           return (
             <Wrapper>
-              {console.log('navbar', loginInfo)}
+              {console.log('unAuth', loginInfo)}
               <ul>
                 <li>
-                  <a href="/meeting">Meeting</a>
+                  <Link to="/meeting">Meeting</Link>
                 </li>
                 <li>
-                  <a href="/createReview">Review</a>
-                </li>
-                <li>
-                  <a href="/admin">Admin</a>
+                  <Link to="/createReview">Review</Link>
                 </li>
               </ul>
-              <Button variant="contained">Contained</Button>
+              <Button
+                variant="contained"
+                onClick={() => signOutFirebase(navigate)}
+              >
+                Sign out
+              </Button>
             </Wrapper>
           )
         } else {
@@ -53,7 +57,7 @@ const NavBar = () => {
               {console.log('navbar', loginInfo)}
               <ul>
                 <li>
-                  <a href="/signup">Login</a>
+                  <Link to="/signup">Login</Link>
                 </li>
               </ul>
             </Wrapper>

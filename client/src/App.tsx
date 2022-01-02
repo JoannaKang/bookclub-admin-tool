@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { getAuth } from 'firebase/auth'
 import { Member } from './Interfaces/Member'
 
-import AuthorizedApp from './Apps/Authorized/UserApp'
+import AuthorizedApp from './Apps/Authorized/AuthorisedApp'
 import UnAuthrizedApp from './Apps/Unauthorized/UnAuthorizedApp'
 
 import { GlobalStyle } from './GlobalStyle'
@@ -33,10 +33,8 @@ const App: React.FC = () => {
   const queryLoginInfo = async user => {
     const memberInfo = await getMemberInfoByUserId(user.uid)
     if (memberInfo === undefined) {
-      console.log('user undefined')
       setTimeout(queryLoginInfo, 10, user)
     } else {
-      console.log('setting login info to: ', memberInfo)
       setLoginInfo(memberInfo)
     }
   }

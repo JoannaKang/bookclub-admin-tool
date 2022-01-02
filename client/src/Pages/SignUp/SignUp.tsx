@@ -10,7 +10,10 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+
 import { createMemberInfo } from '../../ApiService/Members'
 import {
   signUpWithEmail,
@@ -19,9 +22,8 @@ import {
 } from '../../Firebase'
 
 export const SignUp: React.FC = (): JSX.Element => {
-  const theme = createTheme()
   const navigate = useNavigate()
-  const initialState = { name: '', email: '', password: '' }
+  const initialState = { name: '', email: '', password: '', isAdmin: false }
   const [loginInfo, setLoginInfo] = React.useState(initialState)
   const [isSignUp, setIsSignUp] = React.useState(true)
 
@@ -43,7 +45,7 @@ export const SignUp: React.FC = (): JSX.Element => {
       userId: createdUserInFirebase?.uid,
       email: createdUserInFirebase?.email,
       name: loginInfo.name,
-      isAdmin: false,
+      isAdmin: loginInfo.isAdmin,
     }
 
     await createMemberInfo(memberInfo)
@@ -72,7 +74,7 @@ export const SignUp: React.FC = (): JSX.Element => {
       userId: createdUserInFirebase?.uid,
       email: createdUserInFirebase?.email,
       name: createdUserInFirebase?.displayName,
-      isAdmin: false,
+      isAdmin: loginInfo.isAdmin,
     }
 
     await createMemberInfo(memberInfo)
@@ -82,10 +84,21 @@ export const SignUp: React.FC = (): JSX.Element => {
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    let userInput: unknown
+
+    if (e.target.name === 'isAdmin') {
+      userInput = e.target.checked as unknown
+    } else {
+      userInput = e.target.value as string
+    }
+
+    console.log('isAdmin', e.target.name, userInput)
     setLoginInfo(() => ({
       ...loginInfo,
-      [e.target.name]: e.target.value as string,
+      [e.target.name]: userInput,
     }))
+
+    console.log(loginInfo)
   }
 
   return (
@@ -170,14 +183,32 @@ export const SignUp: React.FC = (): JSX.Element => {
           <Grid container>
             <Grid item xs>
               {isSignUp ? (
-                <Link
-                  variant="body2"
-                  onClick={() => {
-                    setIsSignUp(!isSignUp)
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'left',
                   }}
                 >
-                  Already have account?
-                </Link>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label="Please check only if you're admin team"
+                      name="isAdmin"
+                      onChange={e =>
+                        handleChange(e as React.ChangeEvent<HTMLInputElement>)
+                      }
+                    />
+                  </FormGroup>
+                  <Link
+                    variant="body2"
+                    onClick={() => {
+                      setIsSignUp(!isSignUp)
+                    }}
+                  >
+                    Already have account?
+                  </Link>
+                </Box>
               ) : (
                 <Link
                   variant="body2"

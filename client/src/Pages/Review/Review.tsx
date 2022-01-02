@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useEffect } from 'react'
 
 import Container from '@mui/material/Container'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -11,10 +12,10 @@ import Rating from '@mui/material/Rating'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
 
 import { getMeetingDates } from '../../ApiService/Meetings'
 import { createReview } from '../../ApiService/Reviews'
-import { useEffect } from 'react'
 
 import { LoginContext } from '../../App'
 
@@ -75,10 +76,8 @@ export const Review: React.FC<any> = (): JSX.Element => {
               alignItems: 'center',
             }}
           >
-            <Typography component="h1" variant="h5">
-              Today’s Review
-            </Typography>
-            <Box sx={{ minWidth: 200 }} padding={[0, 2, 0, 0]}>
+            <h1>Today’s Review</h1>
+            <Box sx={{ minWidth: 200 }} marginTop={3}>
               <FormControl fullWidth>
                 <InputLabel id="meeting-select-label">Meeting date</InputLabel>
                 <Select
@@ -100,6 +99,7 @@ export const Review: React.FC<any> = (): JSX.Element => {
               </FormControl>
             </Box>
             <TextField
+              sx={{ minWidth: 200 }}
               label="Title"
               name="title"
               variant="standard"
@@ -109,6 +109,7 @@ export const Review: React.FC<any> = (): JSX.Element => {
               }
             />
             <TextField
+              sx={{ minWidth: 200 }}
               label="Author"
               name="author"
               variant="standard"
@@ -117,7 +118,7 @@ export const Review: React.FC<any> = (): JSX.Element => {
                 handleChanges(e as React.ChangeEvent<HTMLInputElement>)
               }
             />
-            <Box sx={{ minWidth: 200 }} padding={[2, 0, 1, 0]}>
+            <Box sx={{ minWidth: 200 }} margin={[5, 3]}>
               <FormControl fullWidth>
                 <InputLabel id="genre-select-label">Genre</InputLabel>
                 <Select
@@ -152,8 +153,9 @@ export const Review: React.FC<any> = (): JSX.Element => {
               />
             </Box>
             <Box sx={{ minWidth: 200, alignItems: 'center' }} padding={1}>
-              <Typography component="legend">Rate</Typography>
+              <h3>Rate</h3>
               <Rating
+                sx={{ minWidth: 200 }}
                 name="rate"
                 onChange={e =>
                   handleChanges(e as React.ChangeEvent<HTMLInputElement>)

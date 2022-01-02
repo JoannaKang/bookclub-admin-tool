@@ -9,8 +9,14 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
     display: flex;
     flex-direction: column;
+    width: 100vw;
+    height: 100vh;
   }
 
+  #root {
+    width: 100vw;
+    height: 100vh;
+  }
   a {
     text-decoration: none;
   }
@@ -57,7 +63,7 @@ export const GlobalStyle = createGlobalStyle`
 `
 export const colorTheme = {
   blue: '#396EB0',
-  gree: '#BBDED6',
+  green: '#74d693',
   pink: '#FFB6B9',
   paleblue: '#A6D0E4',
   palegreen: '#F9FFEA',

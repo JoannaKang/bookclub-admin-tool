@@ -3,20 +3,26 @@ import { colorTheme } from '../../../GlobalStyle'
 
 export const Wrapper = styled.header`
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   width: 100vw;
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 2rem;
   background-color: ${colorTheme.paleblue};
 
   a {
     color: ${colorTheme.grey};
   }
 
+  ul {
+    padding: 0;
+  }
+
   ul > li {
     list-style-type: none;
     font-size: 2rem;
     display: inline;
-    margin: 0 2rem;
+    margin: 1rem;
     position: relative;
   }
 
@@ -41,5 +47,14 @@ export const Wrapper = styled.header`
   ul > li:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
+  }
+
+  // Button {
+  //   margin-right: 40px;
+  // }
+
+  @media screen and (max-width: 768px) {
+    direction="column-reverse"
+    background-color: yellow;
   }
 `
