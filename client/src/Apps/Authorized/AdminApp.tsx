@@ -9,15 +9,13 @@ import { FourOFour } from '../../Pages/404/404'
 
 const AdminApp: FunctionComponent<any> = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/meeting" element={<Meeting />} />
-        <Route path="/createReview" element={<Review />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/404" element={<FourOFour />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/meeting" element={<Meeting />} />
+      <Route path="/createReview" element={<Review />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/404" element={<FourOFour />} />
+    </Routes>
   )
 }
 

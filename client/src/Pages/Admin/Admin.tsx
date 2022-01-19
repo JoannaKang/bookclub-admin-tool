@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
@@ -15,6 +16,8 @@ import { LoginContext } from '../../App'
 import { createMeetingInfo } from '../../ApiService/Meetings'
 
 export const Admin = () => {
+  const navigate = useNavigate()
+
   const initialMeetingState = {
     date: new Date(),
     location: '',
@@ -98,6 +101,10 @@ export const Admin = () => {
                       createMeetingInfo({
                         ...meetingInfo,
                         adminId: loginInfo.id as number,
+                      }).then(res => {
+                        if (!res.error) {
+                          navigate('/meeting')
+                        }
                       })
                     }
                   >

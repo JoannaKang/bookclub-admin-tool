@@ -48,9 +48,8 @@ export const SignUp: React.FC = (): JSX.Element => {
       isAdmin: loginInfo.isAdmin,
     }
 
-    await createMemberInfo(memberInfo)
-
-    alert(` Hello ${memberInfo.name} !`)
+    const createdMember = await createMemberInfo(memberInfo)
+    alert(` Hello ${createdMember.name} !`)
     navigate('/createReview')
   }
 
@@ -92,13 +91,10 @@ export const SignUp: React.FC = (): JSX.Element => {
       userInput = e.target.value as string
     }
 
-    console.log('isAdmin', e.target.name, userInput)
     setLoginInfo(() => ({
       ...loginInfo,
       [e.target.name]: userInput,
     }))
-
-    console.log(loginInfo)
   }
 
   return (

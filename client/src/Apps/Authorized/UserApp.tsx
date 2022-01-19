@@ -6,18 +6,15 @@ import { SignUp } from '../../Pages/SignUp/SignUp'
 import { Admin } from '../../Pages/Admin/Admin'
 import { FourOFour } from '../../Pages/404/404'
 
-const UnAuthrizedApp: FunctionComponent<any> = () => {
+const UserApp: FunctionComponent<any> = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/meeting" element={<Meeting />} />
-        <Route path="/createReview" element={<Review />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/" element={<FourOFour />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/meeting" element={<Meeting />} />
+      <Route path="/createReview" element={<Review />} />
+      <Route path="/" element={<FourOFour />} />
+    </Routes>
   )
 }
 
-export default UnAuthrizedApp
+export default UserApp

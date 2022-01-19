@@ -1,8 +1,12 @@
 import { Review } from '../Interfaces/Review'
 import { HttpRequest } from './HttpRequest'
 
-export const createReview = (review: Review) => {
-  HttpRequest.post('/reviews/review', review)
+export const createReview = async (review: Review): Promise<any> => {
+  return await HttpRequest.post('/reviews/review', review)
+    .then(res => res)
+    .catch(err => {
+      alert(err)
+    })
 }
 
 export const getReviewByUser = async (id: number) => {

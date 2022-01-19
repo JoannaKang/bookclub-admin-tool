@@ -12,14 +12,13 @@ export const getMeetingDates = async () => {
   return meetingDates
 }
 
-export const createMeetingInfo = async (meetingInfo: Meeting) => {
-  const response = await HttpRequest.post('/meetings', meetingInfo)
-  console.log(response)
+export const createMeetingInfo = (meetingInfo: Meeting) => {
+  return HttpRequest.post('/meetings', meetingInfo)
 }
 
 export const getMeetingsInfoByUser = async (userId: number) => {
   const response = await fetch(
-    HttpRequest.BASE_URL + `/meetings/${userId}`,
+    `${HttpRequest.BASE_URL}/meetings?user_id=${userId}`,
   ).then(res => res.json())
   return response
 }

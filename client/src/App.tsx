@@ -13,22 +13,20 @@ import { GlobalStyle } from './GlobalStyle'
 import { getMemberInfoByUserId } from './ApiService/Members'
 import NavBar from './Components/NavBar/NavBar'
 
-function defaultLoginInfo() {
-  return {
-    isAdmin: false,
-    name: '',
-    userId: '',
-    email: '',
-    id: undefined,
-    updateAt: '',
-  }
+const defaultLoginInfo = {
+  isAdmin: false,
+  name: '',
+  userId: '',
+  email: '',
+  id: undefined,
+  updateAt: '',
 }
 
-export const LoginContext = React.createContext<Member>(defaultLoginInfo())
+export const LoginContext = React.createContext<Member>(defaultLoginInfo)
 
 const App: React.FC = () => {
   const theme = createTheme()
-  const [loginInfo, setLoginInfo] = React.useState<Member>(defaultLoginInfo())
+  const [loginInfo, setLoginInfo] = React.useState<Member>(defaultLoginInfo)
 
   const queryLoginInfo = async user => {
     const memberInfo = await getMemberInfoByUserId(user.uid)
@@ -46,7 +44,7 @@ const App: React.FC = () => {
         queryLoginInfo(user)
       } else {
         console.log('signed out')
-        setLoginInfo(defaultLoginInfo())
+        setLoginInfo(defaultLoginInfo)
       }
     })
   }, [])

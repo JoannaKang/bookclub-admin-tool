@@ -26,7 +26,7 @@ export async function createReview(req: Request, res: Response) {
   } catch (error) {
     console.log('Failed to add MeetingMemberMapping')
     res
-      .status(500)
+      .status(400)
       .send({ alert: 'Can not save review twice in the same meeting' })
     return
   }
@@ -43,11 +43,11 @@ export async function createReview(req: Request, res: Response) {
       genre,
     })
   } catch (error) {
-    res.status(500).send({ alert: 'Failed to create new review' })
+    res.status(400).send({ alert: 'Failed to create new review' })
     return
   }
 
-  res.status(200).json({
+  res.status(201).json({
     newReview,
     meetingAndMemberId,
     alert: 'Successfully saved a review!',

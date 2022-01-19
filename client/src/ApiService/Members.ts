@@ -9,15 +9,11 @@ export const getMemberInfoByUserId = async (
   return user.length > 0 ? user[0] : undefined
 }
 
-export const createMemberInfo = async (memberInfo: Member) => {
+export const createMemberInfo = async (memberInfo: Member): Promise<Member> => {
   const response = await HttpRequest.post('/members', memberInfo)
   if (response.errors) {
+    console.error(Error)
     throw Error
   }
-
-  try {
-    return response
-  } catch (Error) {
-    console.error(Error)
-  }
+  return response
 }

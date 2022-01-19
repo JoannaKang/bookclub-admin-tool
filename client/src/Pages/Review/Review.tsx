@@ -11,15 +11,16 @@ import Select from '@mui/material/Select'
 import Rating from '@mui/material/Rating'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
 
 import { getMeetingDates } from '../../ApiService/Meetings'
 import { createReview } from '../../ApiService/Reviews'
+import { useNavigate } from 'react-router-dom'
 
 import { LoginContext } from '../../App'
 
 export const Review: React.FC<any> = (): JSX.Element => {
+  const navigate = useNavigate()
+
   const CATEGORY = [
     'Arts',
     'Biographies',
@@ -164,9 +165,17 @@ export const Review: React.FC<any> = (): JSX.Element => {
             </Box>
             <Button
               variant="contained"
-              onClick={() =>
-                createReview({ memberId: loginInfo.id, ...review })
-              }
+              onClick={() => {
+                createReview({
+                  memberId: loginInfo.id,
+                  ...review,
+                }).then(res => {
+                  console.log('⭐️', res)
+                  if (res) {
+                    navigate('/meeting')
+                  }
+                })
+              }}
             >
               {' '}
               Submit
