@@ -1,3 +1,5 @@
+import { AirlineSeatLegroomReducedTwoTone } from '@mui/icons-material'
+
 export class HttpRequest {
   public static BASE_URL = 'http://localhost:8080'
 
@@ -8,19 +10,16 @@ export class HttpRequest {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
-    }).then(
-      async res => {
-        if (res.status >= 200) {
-          const json = await res.json()
-          console.log('in httprequest', json)
-          return json
-        } else {
-          alert('saved successfully')
+    }).then(async res => {
+      const json = await res.json()
+      if (res.ok) {
+        if (json.alert) {
+          alert(json.alert)
         }
-      },
-      () => {
-        alert('Something went wrong in server')
-      },
-    )
+        return json
+      } else {
+        throw new Error(json.alert)
+      }
+    })
   }
 }

@@ -13,6 +13,7 @@ export async function getMeetingsInfo(req: Request, res: Response) {
 }
 
 export async function getMeetingsInfoByUser(req: Request, res: Response) {
+  console.log('req', req.body)
   try {
     const { userId } = req.body
     const meetingIds = await MeetingMemberMapping.findAll({
@@ -34,15 +35,17 @@ export async function getMeetingsInfoByUser(req: Request, res: Response) {
 
 export async function createMeeting(req: Request, res: Response) {
   try {
-    const { location, locationReview, introduction, adminId } = req.body
+    console.log(req.body)
+    const { location, locationReview, introduction, adminId, date } = req.body
     const newMeeting = await Meeting.create({
       location,
       locationReview,
       introduction,
       adminId,
+      date,
     })
-    res.status(200).json(newMeeting)
+    res.status(200).json({ newMeeting, alert: 'Successfully saved a meeting!' })
   } catch (error) {
-    res.status(500).json(error)
+    res.status(401).json({ error: 'create failed!' })
   }
 }

@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app'
 import {
   getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -8,7 +9,7 @@ import {
 } from 'firebase/auth'
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyCmBrVHLIaw24Dr5PL9-RXGVYbF2wd8osc',
+  apiKey: process.env.REACT_APP_FB_APIKEY,
   authDomain: 'bookclub-admin-tool.firebaseapp.com',
   projectId: 'bookclub-admin-tool',
   storageBucket: 'bookclub-admin-tool.appspot.com',
@@ -56,4 +57,15 @@ export const signUpWithGoogleId = async () => {
     const email = error.email
     alert(errorCode, errorMessage, email)
   }
+}
+
+export const signOutFirebase = navigate => {
+  signOut(auth)
+    .then(() => {
+      alert('Signed out')
+      navigate('/signup')
+    })
+    .catch(error => {
+      console.error(error)
+    })
 }

@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config({ path: '../.env' })
 
+console.log('in server2', process.env)
 const config = {
   db: {
     host: process.env.DB_HOST,

@@ -27,6 +27,10 @@ const Meeting = sequelize.define('meeting', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  date: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
 })
 
 export default Meeting

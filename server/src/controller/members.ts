@@ -31,7 +31,6 @@ export async function createMember(req: Request, res: Response) {
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
-    console.log('isEmpty', res.status(400).json({ errors: errors.array() }))
     return res.status(400).json({ errors: errors.array() })
   }
 

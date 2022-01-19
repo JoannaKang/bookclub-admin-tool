@@ -1,8 +1,10 @@
 export interface Meeting {
-  id: number
-  location: string
+  adminId: number
+  createdAt?: string
+  date: Date
+  id?: number
   introduction: string
+  location: string
   locationReview: string
-  createdAt: string
-  updatedAt: string
+  updatedAt?: string
 }
