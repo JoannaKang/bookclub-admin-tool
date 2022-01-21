@@ -37,10 +37,15 @@ export const Admin = () => {
   return (
     <LoginContext.Consumer>
       {loginInfo => (
-        <Grid container spacing={1} padding={3}>
-          <Grid item xs={12}>
+        <Grid
+          container
+          spacing={1}
+          padding={3}
+          justifyContent={'center'}
+          alignItems={'center'}
+        >
+          <Grid item xs={10}>
             <Box sx={{ padding: 2 }}>
-              <h1>Create new meeting schedule</h1>
               <Paper
                 variant="outlined"
                 sx={{
@@ -49,6 +54,7 @@ export const Admin = () => {
                 }}
               >
                 <Stack spacing={3}>
+                  <h1>Create new meeting schedule</h1>
                   <h2>📅 Meeting Date</h2>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker

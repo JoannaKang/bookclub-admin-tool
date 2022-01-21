@@ -53,8 +53,8 @@ export const Wrapper = styled.header`
   //   margin-right: 40px;
   // }
 
-  @media screen and (max-width: 768px) {
+  /* @media screen and (max-width: 768px) {
     direction="column-reverse"
     background-color: yellow;
-  }
+  } */
 `

@@ -11,7 +11,7 @@ const NavBar = () => {
   const navigate = useNavigate()
   const authUserNavItems = [
     { name: 'Meeting', href: '/meeting' },
-    { name: 'Review', href: '/createReview' },
+    { name: 'Review', href: '/review' },
   ]
   const adminUserNavItems = [
     ...authUserNavItems,

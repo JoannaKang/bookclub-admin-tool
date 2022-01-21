@@ -11,7 +11,7 @@ const UserApp: FunctionComponent<any> = () => {
     <Routes>
       <Route path="/signup" element={<SignUp />} />
       <Route path="/meeting" element={<Meeting />} />
-      <Route path="/createReview" element={<Review />} />
+      <Route path="/review" element={<Review />} />
       <Route path="/" element={<FourOFour />} />
     </Routes>
   )
