@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import Divider from '@mui/material/Divider'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
@@ -15,8 +14,10 @@ import Rating from '@mui/material/Rating'
 import Typography from '@mui/material/Typography'
 
 import { CreateReviewForm } from './Component/CreateReview'
-
-import { getReviewByUser, getReviewByMeetingId } from '../../ApiService/Reviews'
+import {
+  getReviewByUser,
+  getReviewsByMeetingId,
+} from '../../ApiService/Reviews'
 import { LoginContext } from '../../App'
 import { IReview } from '../../Interfaces/Review'
 
@@ -25,26 +26,29 @@ import { fontSize } from '../../GlobalStyle'
 export const Review: React.FC<any> = (): JSX.Element => {
   const [viewmode, setViewmode] = React.useState('REVIEW')
   const [reviews, setReviews] = React.useState<IReview[]>([])
-  const [meetingId, setMeetingId] = React.useState<number>(0)
+  const [meetingId, setMeetingId] = React.useState<number>(7)
   const [selectedReview, setSelectedReview] = React.useState<any>({})
-
   const loginInfo = useContext(LoginContext)
 
   useEffect(() => {
-    getReviewByUser(loginInfo.id as number).then(info => setReviews(info))
+    getReviewByUser(loginInfo.id as number).then(info => {
+      setReviews(info)
+    })
   }, [])
   useEffect(() => {
     const selected = reviews.find(review => review.meetingId === meetingId)
-
-    getReviewByMeetingId(meetingId).then(res => console.log(res))
     setSelectedReview(selected)
+    console.log('meetingId', meetingId)
+    getReviewsByMeetingId(meetingId, loginInfo?.id as number).then(res =>
+      console.log(res),
+    )
   }, [meetingId])
 
-  console.log(meetingId)
   return (
     <LoginContext.Consumer>
       {loginInfo => (
         <>
+          {console.log(loginInfo)}
           {viewmode === 'REVIEW' && (
             <Grid
               container
@@ -63,12 +67,13 @@ export const Review: React.FC<any> = (): JSX.Element => {
                       id="demo-simple-select"
                       defaultValue=""
                       onChange={e => {
+                        console.log(parseInt(e.target.value))
                         setMeetingId(parseInt(e.target.value))
                       }}
                     >
-                      {reviews.map((review, index) => (
-                        <MenuItem key={index} value={review.meetingId}>
-                          {review.createdAt?.slice(0, 10)}
+                      {reviews?.map((review: IReview, index: number) => (
+                        <MenuItem key={index} value={review?.meeting?.id}>
+                          {review?.meeting?.date?.toString().slice(0, 10)}
                         </MenuItem>
                       ))}
                     </Select>

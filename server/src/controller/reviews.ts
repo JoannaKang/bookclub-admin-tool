@@ -1,29 +1,39 @@
 import { Request, Response } from 'express'
 import Review from '../model/reviews'
 import Meeting from '../model/meetings'
+import Member from '../model/members'
 import MeetingMemberMapping from '../model/meetingMemberMapping'
-import SQ from 'sequelize'
+import { Op } from 'sequelize'
 
 export async function getReviewByUser(req: Request, res: Response) {
   const reviews = await Review.findAll({
     where: {
       memberId: req.params.id,
     },
+    include: [
+      {
+        model: Meeting,
+        required: true,
+      },
+    ],
   })
   res.status(200).json(reviews)
 }
 
-export async function getReviewByMeetingId(req: Request, res: Response) {
-  console.log('😂')
-  const meetingId = req.params
-  const membersId = await MeetingMemberMapping.findAll({
-    attributes: ['memberId'],
-    where: meetingId,
-  })
-  const memberIdIdOnly = (membersId as any[]).map(r => r.memberId)
-  const Op = SQ.Op
-  const reviewInfo = await Meeting.findAll({
-    where: { id: { [Op.or]: memberIdIdOnly } },
+export async function getReviewsByMeetingId(req: Request, res: Response) {
+  const reviewInfo = await Review.findAll({
+    where: {
+      [Op.and]: [
+        { meetingId: req.params.meetingId },
+        { memberId: { [Op.not]: req.params.memberId } },
+      ],
+    },
+    include: [
+      {
+        model: Member,
+        required: true,
+      },
+    ],
   })
   res.status(200).json(reviewInfo)
 }

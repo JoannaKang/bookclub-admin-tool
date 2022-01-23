@@ -16,9 +16,13 @@ export const getReviewByUser = async (id: number) => {
   return response
 }
 
-export const getReviewByMeetingId = async (id: number) => {
+// Reviews made by member should be excluded
+export const getReviewsByMeetingId = async (
+  meetingId: number,
+  memberId: number,
+) => {
   const response = await fetch(
-    HttpRequest.BASE_URL + `/reviews/info/${id}`,
+    HttpRequest.BASE_URL + `/reviews/info/${meetingId}/${memberId}`,
   ).then(res => res.json())
   return response
 }

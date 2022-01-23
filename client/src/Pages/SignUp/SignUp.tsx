@@ -50,7 +50,7 @@ export const SignUp: React.FC = (): JSX.Element => {
 
     const createdMember = await createMemberInfo(memberInfo)
     alert(` Hello ${createdMember.name} !`)
-    navigate('/createReview')
+    navigate('/review')
   }
 
   const submitEmailLogin = async (
@@ -60,7 +60,7 @@ export const SignUp: React.FC = (): JSX.Element => {
     await signInWithEmail(loginInfo.email, loginInfo.password)
 
     alert(` Successfully logged in!`)
-    navigate('/createReview')
+    navigate('/review')
   }
 
   const submitGoogle = async (
@@ -79,7 +79,7 @@ export const SignUp: React.FC = (): JSX.Element => {
     await createMemberInfo(memberInfo)
 
     alert(` Hello ${memberInfo.name} !`)
-    navigate('/createReview')
+    navigate('/review')
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
