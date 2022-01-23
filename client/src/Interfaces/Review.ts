@@ -1,4 +1,4 @@
-export interface Review {
+export interface IReview {
   memberId?: number
   meetingId: number
   title: string
@@ -6,4 +6,7 @@ export interface Review {
   genre: string
   review: string
   rate: number
+  createdAt?: string
+  updatedAt?: string
+  id?: number
 }
