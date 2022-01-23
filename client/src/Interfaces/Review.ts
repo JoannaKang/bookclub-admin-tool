@@ -1,4 +1,5 @@
 import { Meeting } from './Meeting'
+import { Member } from './Member'
 export interface IReview {
   memberId?: number
   meetingId: number
@@ -11,4 +12,5 @@ export interface IReview {
   updatedAt?: string
   id?: number
   meeting?: Meeting
+  member?: Member
 }
