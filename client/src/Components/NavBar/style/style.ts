@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colorTheme } from '../../../GlobalStyle'
+import { colorTheme, fontSize } from '../../../GlobalStyle'
 
 export const Wrapper = styled.header`
   display: flex;
@@ -20,14 +20,14 @@ export const Wrapper = styled.header`
 
   ul > li {
     list-style-type: none;
-    font-size: 2rem;
+    font-size: 1.8rem;
     display: inline;
     margin: 1rem;
     position: relative;
   }
 
   ul > li:hover {
-    font-size: 2.1rem;
+    font-size: 2rem;
     font-weight: 600;
   }
 

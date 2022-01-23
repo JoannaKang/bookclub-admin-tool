@@ -8,7 +8,9 @@ import { signOutFirebase } from '../../Firebase'
 import { Link, useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
+  const loginInfo = useContext(LoginContext)
   const navigate = useNavigate()
+
   const authUserNavItems = [
     { name: 'Meeting', href: '/meeting' },
     { name: 'Review', href: '/review' },
@@ -19,7 +21,6 @@ const NavBar = () => {
   ]
   const unAuthNavItems = [{ name: 'Login', href: '/signup' }]
 
-  const loginInfo = useContext(LoginContext)
   const [navItems, setNavItems] = React.useState(unAuthNavItems)
 
   useEffect(() => {

@@ -8,12 +8,11 @@ export async function getMeetingsInfo(req: Request, res: Response) {
     const meetings = await Meeting.findAll()
     res.status(200).json(meetings)
   } catch (error) {
-    res.status(500).json(error)
+    res.status(401).json(error)
   }
 }
 
 export async function getMeetingsInfoByUser(req: Request, res: Response) {
-  console.log('req', req.body)
   try {
     const { userId } = req.body
     const meetingIds = await MeetingMemberMapping.findAll({
@@ -29,7 +28,7 @@ export async function getMeetingsInfoByUser(req: Request, res: Response) {
 
     res.status(200).json(meetingInfo)
   } catch (error) {
-    res.status(500).json(error)
+    res.status(401).json(error)
   }
 }
 

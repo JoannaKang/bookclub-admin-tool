@@ -20,6 +20,12 @@ npm start
   DB_PASSWORD=your_database_password
   ```
 
+  - Create `.env` file in the `client` directory and save following environment variables
+
+  ```
+  REACT_APP_FB_APIKEY=your_firebase_api_key
+  ```
+
   - Create mysql database: Use `npm run db:pre-migrate` command with mysql password
 
   ```
@@ -44,15 +50,18 @@ npm start
 
 - DONE
 
+  - Navitagion bar - separte Unauth / Auth / Admin nav bar
+  - Router - separate Auth / unAuth path
   - Login Page - connected to the Firebase, BE api to create new member info
-  - Review Page - connected to the BE api to create book review
+  - Review Page - make toggle Create / View mode
+  - Meeting page - fetch meeting history from BE
+  - Admin page - create meeting info form
 
 - TODO
-  - Navitagion bar - make user can navigate between the meeting & book review page
-  - Router - separate Auth / unAuth path
-  - Admin page - create meeting info form
-  - Meeting page - fetch meeting history from BE
-  - Review page - make user can toggle review history <-> create history view
+  - Router - make 404 redirect path
+  - Review - show 'generate review summary' button only for the admin user
+  - Meeting page - markup dashboard UI
+  - Admin page - make toggle Create / View mode
 
 ⚙️ Server
 
@@ -60,12 +69,15 @@ npm start
 
   |         | GET                                      | POST          | PUT | DELETE |
   | ------- | ---------------------------------------- | ------------- | --- | ------ |
-  | Members | getMembersInfo<br>getMembersInfoByUserId | createMember  |     |        |
-  | Reviews | getReviewByUser                          | createReview  |     |        |
+  | Members | getMembersInfo<br>getMemberInfoByUserId  | createMember  |     |        |
+  | Reviews | getReviewByUser<br>getReviewsByMeetingId | createReview  |     |        |
   | Meeting | getMeetingInfo<br>getMeetingsInfoByUser  | createMeeting |     |        |
 
   <br>
 
 - TODO
-  - Add GET request for the meeting
-  - Add PUT / DELETE request for the review items
+  - Add PUT / DELETE requests
+
+🛠 Extras
+
+- CI/CD pipeline using Azur
